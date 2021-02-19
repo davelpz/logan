@@ -88,6 +88,14 @@ public class Tuple {
         return this;
     }
 
+    public static Tuple negate(Tuple a) {
+        return new Tuple(-a.x(),-a.y(),-a.z(),-a.w());
+    }
+
+    public Tuple negate() {
+        return new Tuple(-x(),-y(),-z(),-w());
+    }
+
     public boolean equals(Tuple b) {
         return equals(b, EPSILON);
     }

@@ -51,9 +51,9 @@ Scenario: Subtracting a vector from the zero vector
     And v ← vector(1, -2, 3)
   Then zero subtract v = vector(-1, 2, -3)
 
-#Scenario: Negating a tuple
-#  Given a ← tuple(1, -2, 3, -4)
-#  Then -a = tuple(-1, 2, -3, 4)
+Scenario: Negating a tuple
+  Given a ← tuple(1, -2, 3, -4)
+  Then negate a = tuple(-1, 2, -3, 4)
 
 #Scenario: Multiplying a tuple by a scalar
 #  Given a ← tuple(1, -2, 3, -4)

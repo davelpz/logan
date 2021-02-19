@@ -126,6 +126,10 @@ public class StepDefinitions {
     public void zero_subtract_v_vector(Integer int1, Integer int2, Integer int3) {
         assertTrue(Tuple.subtract(zero,v).equals(Tuple.vector(int1,int2,int3)));
     }
+    @Then("negate a = tuple\\({int}, {int}, {int}, {int})")
+    public void negate_a_tuple(Integer int1, Integer int2, Integer int3, Integer int4) {
+        assertTrue(Tuple.negate(a).equals(new Tuple(int1,int2,int3,int4)));
+    }
     @Then("magnitude\\(v) = {int}")
     public void magnitude_v(Integer int1) {
         // Write code here that turns the phrase above into concrete actions
