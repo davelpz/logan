@@ -1,9 +1,9 @@
 package com.davelpz.tuple;
 
 public class Tuple {
-    private static double EPSILON = 0.00001;
+    private static final double EPSILON = 0.00001;
 
-    private double[] values = new double[4];
+    private final double[] values = new double[4];
 
     public Tuple(double x, double y, double z, double w) {
         values[0] = x;
@@ -18,6 +18,33 @@ public class Tuple {
 
     public static Tuple vector(double x, double y, double z) {
         return new Tuple(x, y, z, 0.0);
+    }
+
+    public static Tuple add(Tuple a, Tuple b) {
+        return new Tuple(a.x() + b.x(), a.y() + b.y(), a.z() + b.z(), a.w() + b.w());
+    }
+
+    public static Tuple subtract(Tuple a, Tuple b) {
+        return new Tuple(a.x() - b.x(), a.y() - b.y(), a.z() - b.z(), a.w() - b.w());
+    }
+
+    public static Tuple negate(Tuple a) {
+        return new Tuple(-a.x(), -a.y(), -a.z(), -a.w());
+    }
+
+    public static Tuple mul(Tuple a, double b) {
+        return new Tuple(a.x() * b, a.y() * b,
+                a.z() * b, a.w() * b);
+    }
+
+    public static Tuple mul(double b, Tuple a) {
+        return new Tuple(a.x() * b, a.y() * b,
+                a.z() * b, a.w() * b);
+    }
+
+    public static Tuple div(Tuple a, double b) {
+        return new Tuple(a.x() / b, a.y() / b,
+                a.z() / b, a.w() / b);
     }
 
     public double x() {
@@ -64,20 +91,12 @@ public class Tuple {
         return w() == 0.0;
     }
 
-    public static Tuple add(Tuple a, Tuple b) {
-        return new Tuple(a.x() + b.x(), a.y() + b.y(), a.z() + b.z(), a.w() + b.w());
-    }
-
     public Tuple add(Tuple b) {
         values[0] += b.x();
         values[1] += b.y();
         values[2] += b.z();
         values[3] += b.w();
         return this;
-    }
-
-    public static Tuple subtract(Tuple a, Tuple b) {
-        return new Tuple(a.x() - b.x(), a.y() - b.y(), a.z() - b.z(), a.w() - b.w());
     }
 
     public Tuple subtract(Tuple b) {
@@ -88,13 +107,30 @@ public class Tuple {
         return this;
     }
 
-    public static Tuple negate(Tuple a) {
-        return new Tuple(-a.x(),-a.y(),-a.z(),-a.w());
+    public Tuple negate() {
+        return new Tuple(-x(), -y(), -z(), -w());
     }
 
-    public Tuple negate() {
-        return new Tuple(-x(),-y(),-z(),-w());
+    public Tuple mul(double b) {
+        setX(x() * b);
+        setY(y() * b);
+        setZ(z() * b);
+        setW(w() * b);
+        return this;
     }
+
+    public Tuple div(double b) {
+        setX(x() / b);
+        setY(y() / b);
+        setZ(z() / b);
+        setW(w() / b);
+        return this;
+    }
+
+    public double magnitude() {
+        return Math.sqrt(x() * x() + y() * y() + z() * z() + w() * w());
+    }
+
 
     public boolean equals(Tuple b) {
         return equals(b, EPSILON);
