@@ -1,7 +1,7 @@
 package com.davelpz.tuple;
 
 public class Tuple {
-    private static final double EPSILON = 0.00001;
+    public static final double EPSILON = 0.00001;
 
     private final double[] values = new double[4];
 
@@ -45,6 +45,19 @@ public class Tuple {
     public static Tuple div(Tuple a, double b) {
         return new Tuple(a.x() / b, a.y() / b,
                 a.z() / b, a.w() / b);
+    }
+
+    public static double dot(Tuple a, Tuple b) {
+        return a.x() * b.x()
+                + a.y() * b.y()
+                + a.z() * b.z()
+                + a.w() * b.w();
+    }
+
+    public static Tuple cross(Tuple a, Tuple b) {
+        return Tuple.vector(a.y() * b.z() - a.z() * b.y(),
+                a.z() * b.x() - a.x() * b.z(),
+                a.x() * b.y() - a.y() * b.x());
     }
 
     public double x() {
@@ -131,6 +144,12 @@ public class Tuple {
         return Math.sqrt(x() * x() + y() * y() + z() * z() + w() * w());
     }
 
+    public Tuple normalize() {
+        return new Tuple(x() / magnitude(),
+                y() / magnitude(),
+                z() / magnitude(),
+                w() / magnitude());
+    }
 
     public boolean equals(Tuple b) {
         return equals(b, EPSILON);

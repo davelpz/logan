@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 
 public class StepDefinitions {
     Tuple a;
+    Tuple b;
     Tuple p;
     Tuple p1;
     Tuple p2;
@@ -18,6 +19,7 @@ public class StepDefinitions {
     Tuple a1;
     Tuple a2;
     Tuple zero;
+    Tuple norm;
 
     @Given("a ← tuple\\({double}, {double}, {double}, {double})")
     public void a_tuple(Double double1, Double double2, Double double3, Double double4) {
@@ -152,6 +154,7 @@ public class StepDefinitions {
     @Then("a mul {double} = tuple\\({double}, {double}, {double}, {double})")
     public void a_mul_tuple(Double double1, Double double2, Double double3, Double double4, Double double5) {
         assertTrue(Tuple.mul(a, double1).equals(new Tuple(double2, double3, double4, double5)));
+        assertTrue(Tuple.mul(double1,a).equals(new Tuple(double2, double3, double4, double5)));
     }
 
     @Then("a div {double} = tuple\\({double}, {double}, {double}, {double})")
@@ -161,66 +164,57 @@ public class StepDefinitions {
 
     @Then("magnitude\\(v) = {double}")
     public void magnitude_v(Double double1) {
-        assertEquals(double1, v.magnitude(), 0.00001);
+        assertEquals(double1, v.magnitude(), Tuple.EPSILON);
     }
 
     @Then("magnitude\\(v) = √{int}")
     public void magnitude_v2(Integer int1) {
-        assertEquals(Math.sqrt(int1), v.magnitude(), 0.00001);
+        assertEquals(Math.sqrt(int1), v.magnitude(), Tuple.EPSILON);
     }
 
-    @Then("normalize\\(v) = vector\\({int}, {int}, {int})")
-    public void normalize_v_vector(Integer int1, Integer int2, Integer int3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("normalize\\(v) = vector\\({double}, {double}, {double})")
+    public void normalize_v_vector(Double double1, Double double2, Double double3) {
+        assertTrue(v.normalize().equals(Tuple.vector(double1,double2, double3)));
     }
 
     @Then("normalize\\(v) = approximately vector\\({double}, {double}, {double})")
     public void normalize_v_approximately_vector(Double double1, Double double2, Double double3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertTrue(v.normalize().equals(Tuple.vector(double1,double2, double3)));
     }
 
     @When("norm ← normalize\\(v)")
     public void norm_normalize_v() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        norm = v.normalize();
     }
 
-    @Then("magnitude\\(norm) = {int}")
-    public void magnitude_norm(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("magnitude\\(norm) = {double}")
+    public void magnitude_norm(Double double1) {
+        assertEquals(norm.magnitude(), double1, Tuple.EPSILON);
     }
 
     @Given("a ← vector\\({int}, {int}, {int})")
     public void a_vector(Integer int1, Integer int2, Integer int3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        a = Tuple.vector(int1,int2,int3);
     }
 
     @Given("b ← vector\\({int}, {int}, {int})")
     public void b_vector(Integer int1, Integer int2, Integer int3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        b = Tuple.vector(int1,int2,int3);
     }
 
-    @Then("dot\\(a, b) = {int}")
-    public void dot_a_b(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("dot\\(a, b) = {double}")
+    public void dot_a_b(Double double1) {
+        assertEquals(Tuple.dot(a,b), double1, Tuple.EPSILON);
     }
 
     @Then("cross\\(a, b) = vector\\({int}, {int}, {int})")
     public void cross_a_b_vector(Integer int1, Integer int2, Integer int3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertTrue(Tuple.cross(a, b).equals(Tuple.vector(int1, int2, int3)));
     }
 
     @Then("cross\\(b, a) = vector\\({int}, {int}, {int})")
     public void cross_b_a_vector(Integer int1, Integer int2, Integer int3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertTrue(Tuple.cross(b, a).equals(Tuple.vector(int1, int2, int3)));
     }
 
     @Given("c ← color\\({double}, {double}, {double})")
