@@ -1,4 +1,4 @@
-package com.davelpz.tuple;
+package com.davelpz.logan.tuple;
 
 import org.junit.Test;
 

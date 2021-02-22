@@ -1,4 +1,4 @@
-package com.davelpz.tuple;
+package com.davelpz.logan.tuple;
 
 public class Tuple {
     public static final double EPSILON = 0.00001;

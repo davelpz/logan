@@ -1,4 +1,4 @@
-package com.davelpz.color;
+package com.davelpz.logan.color;
 
 public class Color {
     public static final double EPSILON = 0.00001;
@@ -87,6 +87,23 @@ public class Color {
         setGreen(green() * b.green());
         setBlue(blue() * b.blue());
         return this;
+    }
+
+    public void clamp(double min, double max) {
+        if (values[0] < min)
+            values[0] = min;
+        else if (values[0] > max)
+            values[0] = max;
+
+        if (values[1] < min)
+            values[1] = min;
+        else if (values[1] > max)
+            values[1] = max;
+
+        if (values[2] < min)
+            values[2] = min;
+        else if (values[2] > max)
+            values[2] = max;
     }
 
     public boolean equals(Color b) {

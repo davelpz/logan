@@ -1,4 +1,4 @@
-package logan.tuple;
+package com.davelpz.logan.canvas;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
