@@ -1,5 +1,6 @@
 package logan.tuple;
 
+import com.davelpz.tuple.Color;
 import com.davelpz.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -20,6 +21,9 @@ public class StepDefinitions {
     Tuple a2;
     Tuple zero;
     Tuple norm;
+    Color c;
+    Color c1;
+    Color c2;
 
     @Given("a ← tuple\\({double}, {double}, {double}, {double})")
     public void a_tuple(Double double1, Double double2, Double double3, Double double4) {
@@ -219,62 +223,57 @@ public class StepDefinitions {
 
     @Given("c ← color\\({double}, {double}, {double})")
     public void c_color(Double double1, Double double2, Double double3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        c = new Color(double1,double2,double3);
     }
 
     @Then("c.red = {double}")
     public void c_red(Double double1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals(c.red(),double1,Color.EPSILON);
     }
 
     @Then("c.green = {double}")
     public void c_green(Double double1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals(c.green(),double1,Color.EPSILON);
     }
 
     @Then("c.blue = {double}")
     public void c_blue(Double double1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals(c.blue(),double1,Color.EPSILON);
     }
 
     @Given("c1 ← color\\({double}, {double}, {double})")
     public void c1_color(Double double1, Double double2, Double double3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        c1 = new Color(double1,double2,double3);
     }
 
     @Given("c2 ← color\\({double}, {double}, {double})")
     public void c2_color(Double double1, Double double2, Double double3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        c2 = new Color(double1,double2,double3);
     }
 
-    @Then("c1 {double} c2 = color\\({double}, {double}, {double})")
-    public void c1_c2_color(Double double1, Double double2, Double double3, Double double4) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("c1 plus c2 = color\\({double}, {double}, {double})")
+    public void c1_plus_c2_color(Double double1, Double double2, Double double3) {
+        assertTrue(Color.add(c1, c2).equals(new Color(double1, double2, double3)));
+        assertTrue(c1.add(c2).equals(new Color(double1, double2, double3)));
     }
 
-    @Then("c * {int} = color\\({double}, {double}, {double})")
-    public void c_color(Integer int1, Double double1, Double double2, Double double3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("c1 subtract c2 = color\\({double}, {double}, {double})")
+    public void c1_subtract_c2_color(Double double1, Double double2, Double double3) {
+        assertTrue(Color.subtract(c1, c2).equals(new Color(double1, double2, double3)));
+        assertTrue(c1.subtract(c2).equals(new Color(double1, double2, double3)));
     }
 
-    @Given("c2 ← color\\({double}, {int}, {double})")
-    public void c2_color(Double double1, Integer int1, Double double2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("c mul {double} = color\\({double}, {double}, {double})")
+    public void c_mul_color(Double double1, Double double2, Double double3, Double double4) {
+        assertTrue(Color.mul(c,double1).equals(new Color(double2, double3, double4)));
+        assertTrue(Color.mul(double1,c).equals(new Color(double2, double3, double4)));
+        assertTrue(c.mul(double1).equals(new Color(double2, double3, double4)));
     }
 
-    @Then("c1 * c2 = color\\({double}, {double}, {double})")
-    public void c1_c2_color(Double double1, Double double2, Double double3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("c1 mul c2 = color\\({double}, {double}, {double})")
+    public void c1_mul_c2_color(Double double1, Double double2, Double double3) {
+        assertTrue(Color.mul(c1, c2).equals(new Color(double1, double2, double3)));
+        assertTrue(c1.mul(c2).equals(new Color(double1, double2, double3)));
     }
 
     @Given("n ← vector\\({int}, {int}, {int})")
