@@ -26,10 +26,10 @@ public class Canvas {
     }
 
     public Canvas(double width, double height) {
-        this((int)width,(int)height);
+        this((int) width, (int) height);
     }
 
-    public void writePixel(int x, int y, Color pixel) {
+    public void writePixel(Color pixel, int x, int y) {
         buffer[x][y] = pixel;
     }
 
