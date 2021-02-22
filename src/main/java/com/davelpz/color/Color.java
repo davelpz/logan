@@ -1,4 +1,4 @@
-package com.davelpz.tuple;
+package com.davelpz.color;
 
 public class Color {
     public static final double EPSILON = 0.00001;

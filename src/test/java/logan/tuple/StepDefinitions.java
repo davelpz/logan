@@ -1,6 +1,6 @@
 package logan.tuple;
 
-import com.davelpz.tuple.Color;
+import com.davelpz.color.Color;
 import com.davelpz.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
