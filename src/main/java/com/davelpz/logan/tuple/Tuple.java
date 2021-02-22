@@ -1,5 +1,7 @@
 package com.davelpz.logan.tuple;
 
+import java.util.Arrays;
+
 public class Tuple {
     public static final double EPSILON = 0.00001;
 
@@ -158,5 +160,9 @@ public class Tuple {
     public boolean equals(Tuple b, double delta) {
         return (Math.abs(x() - b.x()) < delta) && (Math.abs(y() - b.y()) < delta) && (Math.abs(z() - b.z()) < delta) && (Math.abs(w() - b.w())
                 < delta);
+    }
+
+    @Override public String toString() {
+        return "Tuple{" + "values=" + Arrays.toString(values) + '}';
     }
 }

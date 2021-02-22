@@ -1,5 +1,7 @@
 package com.davelpz.logan.color;
 
+import java.util.Arrays;
+
 public class Color {
     public static final double EPSILON = 0.00001;
 
@@ -9,6 +11,12 @@ public class Color {
         values[0] = x;
         values[1] = y;
         values[2] = z;
+    }
+
+    public Color(Color c) {
+        values[0] = c.red();
+        values[1] = c.green();
+        values[2] = c.blue();
     }
 
     public static Color add(Color a, Color b) {
@@ -112,5 +120,9 @@ public class Color {
 
     public boolean equals(Color b, double delta) {
         return (Math.abs(red() - b.red()) < delta) && (Math.abs(green() - b.green()) < delta) && (Math.abs(blue() - b.blue()) < delta);
+    }
+
+    @Override public String toString() {
+        return "Color{" + "values=" + Arrays.toString(values) + '}';
     }
 }

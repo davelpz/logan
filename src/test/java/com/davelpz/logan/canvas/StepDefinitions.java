@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 
 public class StepDefinitions {
     Canvas c;
+    Color co1,co2,co3;
     Color red;
     String ppm;
 
@@ -65,6 +66,44 @@ public class StepDefinitions {
         String[] lines = ppm.split("\n");
         String[] lines_subset = Arrays.copyOfRange(lines,int1-1,int2);
         String subset = String.join("\n", lines_subset);
-        assertEquals(docString,subset);
+        System.out.println("|" + docString + "|");
+        System.out.println("|" + subset + "|");
+        assertTrue(docString.equals(subset));
+    }
+
+    @Given("co1 ← color\\({double}, {double}, {double})")
+    public void co1_color(Double double1, Double double2, Double double3) {
+        co1 = new Color(double1,double2,double3);
+    }
+
+    @Given("co2 ← color\\({double}, {double}, {double})")
+    public void co2_color(Double double1, Double double2, Double double3) {
+        co2 = new Color(double1,double2,double3);
+    }
+
+    @Given("co3 ← color\\({double}, {double}, {double})")
+    public void co3_color(Double double1, Double double2, Double double3) {
+        co3 = new Color(double1,double2,double3);
+    }
+
+    @When("write_pixel\\(c, {int}, {int}, co1)")
+    public void write_pixel_c_c1(Integer int1, Integer int2) {
+        c.writePixel(co1,int1,int2);
+    }
+
+    @When("write_pixel\\(c, {int}, {int}, co2)")
+    public void write_pixel_c_c2(Integer int1, Integer int2) {
+        c.writePixel(co2,int1,int2);
+    }
+
+    @When("write_pixel\\(c, {int}, {int}, co3)")
+    public void write_pixel_c_c3(Integer int1, Integer int2) {
+        c.writePixel(co3,int1,int2);
+    }
+
+    @When("every pixel of c is set to color\\({double}, {double}, {double})")
+    public void every_pixel_of_c_is_set_to_color(Double double1, Double double2, Double double3) {
+        Color t = new Color(double1,double2,double3);
+        c.clear(t);
     }
 }
