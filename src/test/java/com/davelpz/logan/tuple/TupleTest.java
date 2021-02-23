@@ -1,6 +1,11 @@
 package com.davelpz.logan.tuple;
 
+import com.davelpz.logan.canvas.Canvas;
+import com.davelpz.logan.color.Color;
+import io.cucumber.java.an.E;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -75,4 +80,43 @@ public class TupleTest {
         assertEquals(4.0, a.w(), Tuple.EPSILON);
     }
 
+
+    class Projectile {
+        public Tuple position;
+        public Tuple velocity;
+    }
+
+    class Environment {
+        public Tuple gravity;
+        public Tuple wind;
+    }
+
+    Projectile tick(Environment env, Projectile projectile) {
+        Tuple position = Tuple.add(projectile.position, projectile.velocity);
+        Tuple velocity = Tuple.add(Tuple.add(projectile.velocity,env.gravity), env.wind);
+        Projectile newProjectile = new Projectile();
+        newProjectile.position = position;
+        newProjectile.velocity = velocity;
+        return newProjectile;
+    }
+
+    @Test
+    public void game() throws IOException {
+        Projectile p = new Projectile();
+        p.position = Tuple.point(0,1,0);
+        p.velocity = Tuple.mul(Tuple.vector(1,1.8,0).normalize(), 11.25);
+
+        Environment e = new Environment();
+        e.gravity = Tuple.vector(0,-0.1,0);
+        e.wind = Tuple.vector(-0.01,0,0);
+
+        Canvas c = new Canvas(900,550);
+
+        for (int i=0;i<195;i++) {
+            c.writePixel(new Color(1,1,1), p.position.x(), 550 - p.position.y());
+            p = tick(e,p);
+        }
+
+        c.canvasToPPMFile("output.ppm");
+    }
 }

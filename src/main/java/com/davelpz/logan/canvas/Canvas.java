@@ -40,6 +40,9 @@ public class Canvas {
     public void writePixel(Color pixel, int x, int y) {
         buffer[x][y] = pixel;
     }
+    public void writePixel(Color pixel, double x, double y) {
+        writePixel(pixel,(int)x,(int)y);
+    }
 
     public Color pixelAt(int x, int y) {
         return buffer[x][y];
