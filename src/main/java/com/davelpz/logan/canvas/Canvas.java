@@ -57,17 +57,18 @@ public class Canvas {
         return output.toString();
     }
 
-    private int write(Writer output, int length, String content) throws IOException {
+    private int write(Writer output, int length, String content, boolean skipDelim) throws IOException {
         int content_length = content.length();
-        if ((length + content_length) > 70) {
+
+        if ((length + content_length + 1) > 70) {
             output.write("\n");
-            if (content.equals(" ")) {
-                return 0;
-            } else {
-                output.write(content);
-                return content_length;
-            }
+            output.write(content);
+            return content_length;
         } else {
+            if (!skipDelim) {
+                output.write(" ");
+                content_length++;
+            }
             output.write(content);
             return content_length + length;
         }
@@ -90,16 +91,9 @@ public class Canvas {
                     String str_ig = String.valueOf(ig);
                     String str_ib = String.valueOf(ib);
 
-                    line_width = write(output,line_width,str_ir);
-                    line_width = write(output,line_width," ");
-
-                    line_width = write(output,line_width,str_ig);
-                    line_width = write(output,line_width," ");
-
-                    line_width = write(output,line_width,str_ib);
-                    if (i+1 != width) {
-                        line_width = write(output,line_width," ");
-                    }
+                    line_width = write(output,line_width,str_ir,i == 0);
+                    line_width = write(output,line_width,str_ig,false);
+                    line_width = write(output,line_width,str_ib,false);
                 }
                 output.write("\n");
             }

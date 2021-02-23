@@ -61,14 +61,33 @@ public class StepDefinitions {
         ppm = c.canvasToPPMString();
     }
 
+    private boolean stringEquals(String a, String b) {
+        String t;
+        if (a.length() > b.length()) {
+            t = b;
+        } else {
+            t = a;
+        }
+
+        for (int i=0;i<t.length();i++) {
+            char ca = a.charAt(i);
+            char cb = b.charAt(i);
+            if (ca != cb) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Then("lines {int}-{int} of ppm are")
     public void lines_of_ppm_are(Integer int1, Integer int2, String docString) {
         String[] lines = ppm.split("\n");
         String[] lines_subset = Arrays.copyOfRange(lines,int1-1,int2);
         String subset = String.join("\n", lines_subset);
-        System.out.println("|" + docString + "|");
-        System.out.println("|" + subset + "|");
-        assertTrue(docString.equals(subset));
+        //System.out.println("|" + docString + "|");
+        //System.out.println("|" + subset + "|");
+        //stringEquals(docString,subset);
+        assertEquals(docString, subset);
     }
 
     @Given("co1 ← color\\({double}, {double}, {double})")
@@ -105,5 +124,10 @@ public class StepDefinitions {
     public void every_pixel_of_c_is_set_to_color(Double double1, Double double2, Double double3) {
         Color t = new Color(double1,double2,double3);
         c.clear(t);
+    }
+
+    @Then("ppm ends with a newline character")
+    public void ppm_ends_with_a_newline_character() {
+        assertEquals(ppm.charAt(ppm.length()-1), '\n');
     }
 }
