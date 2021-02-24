@@ -293,4 +293,9 @@ public class StepDefinitions {
         assertEquals(a.minor(int1,int2), (double) int3, 0.00001);
     }
 
+    @Then("cofactor\\(A, {int}, {int}) = {int}")
+    public void cofactor_a(Integer int1, Integer int2, Integer int3) {
+        assertEquals(a.cofactor(int1,int2), (double) int3, 0.00001);
+    }
+
 }

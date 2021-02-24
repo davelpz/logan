@@ -103,6 +103,15 @@ public class Matrix {
         return sub.determinant();
     }
 
+    public double cofactor(int row, int col) {
+        double minor = minor(row,col);
+        if (((row+col) % 2) == 0) {
+            return minor;
+        } else {
+            return -minor;
+        }
+    }
+
     public boolean setData(List<List<Double>> listdata) {
         if (listdata.size() != dimension) {
             return false;
