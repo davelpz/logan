@@ -175,4 +175,29 @@ public class StepDefinitions {
         Tuple result = Matrix.multiply(Matrix.identity4,tb);
         assertTrue(tb.equals(result));
     }
+
+    @Then("transpose\\(A) is the following matrix:")
+    public void transpose_a_is_the_following_matrix(io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        List<List<Double>> data = dataTable.asLists(Double.TYPE);
+        Matrix expectedResult = new Matrix(4);
+        expectedResult.setData(data);
+        assertTrue(Matrix.transpose(a).equals(expectedResult));
+    }
+
+    @Given("A ← transpose\\(identity_matrix)")
+    public void a_transpose_identity_matrix() {
+        a = Matrix.transpose(Matrix.identity4);
+    }
+
+    @Then("A = identity_matrix")
+    public void a_identity_matrix() {
+        assertTrue(a.equals(Matrix.identity4));
+    }
 }

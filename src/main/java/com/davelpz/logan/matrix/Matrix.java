@@ -65,6 +65,18 @@ public class Matrix {
         return t;
     }
 
+    public static Matrix transpose(Matrix a) {
+        Matrix m = new Matrix(a.dimension);
+
+        for (int row = 0; row < a.dimension; row++) {
+            for (int col = 0; col < a.dimension; col++) {
+                m.data[row][col] = a.data[col][row];
+            }
+        }
+
+        return m;
+    }
+
     public boolean setData(List<List<Double>> listdata) {
         if (listdata.size() != dimension) {
             return false;
