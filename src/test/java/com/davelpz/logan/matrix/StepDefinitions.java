@@ -200,4 +200,97 @@ public class StepDefinitions {
     public void a_identity_matrix() {
         assertTrue(a.equals(Matrix.identity4));
     }
+
+    @Given("the following 2x2 matrix A:")
+    public void the_following_2x2_matrix_a(io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        List<List<Double>> data = dataTable.asLists(Double.TYPE);
+        a = new Matrix(2);
+        a.setData(data);
+    }
+
+    @Then("determinant\\(A) = {int}")
+    public void determinant_a(Integer int1) {
+        assertEquals((double)int1, a.determinant(), 0.00001);
+    }
+
+    @Given("the following 3x3 matrix A:")
+    public void the_following_3x3_matrix_a(io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        List<List<Double>> data = dataTable.asLists(Double.TYPE);
+        a = new Matrix(3);
+        a.setData(data);
+    }
+
+    @Then("submatrix\\(A, {int}, {int}) is the following 2x2 matrix:")
+    public void submatrix_a_is_the_following_2x2_matrix(Integer int1, Integer int2, io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        List<List<Double>> data = dataTable.asLists(Double.TYPE);
+        Matrix expected = new Matrix(2);
+        expected.setData(data);
+        assertTrue(a.submatrix(int1,int2).equals(expected) );
+    }
+
+    @Given("the following 4x4 matrix A:")
+    public void the_following_4x4_matrix_a(io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        List<List<Double>> data = dataTable.asLists(Double.TYPE);
+        a = new Matrix(4);
+        a.setData(data);
+    }
+
+    @Then("submatrix\\(A, {int}, {int}) is the following 3x3 matrix:")
+    public void submatrix_a_is_the_following_3x3_matrix(Integer int1, Integer int2, io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        List<List<Double>> data = dataTable.asLists(Double.TYPE);
+        Matrix expected = new Matrix(3);
+        expected.setData(data);
+        assertTrue(a.submatrix(int1,int2).equals(expected) );
+    }
+
+    @Given("B ← submatrix\\(A, {int}, {int})")
+    public void b_submatrix_a(Integer int1, Integer int2) {
+        b = a.submatrix(int1,int2);
+    }
+
+    @Then("determinant\\(B) = {int}")
+    public void determinant_b(Integer int1) {
+        assertEquals(b.determinant(), (double) int1, 0.00001);
+    }
+
+    @Then("minor\\(A, {int}, {int}) = {int}")
+    public void minor_a(Integer int1, Integer int2, Integer int3) {
+        assertEquals(a.minor(int1,int2), (double) int3, 0.00001);
+    }
+
 }

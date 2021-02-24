@@ -77,6 +77,32 @@ public class Matrix {
         return m;
     }
 
+    public double determinant() {
+        if (dimension==2) {
+            return data[0][0]*data[1][1] - data[0][1]*data[1][0];
+        }
+        return -1;
+    }
+
+    public Matrix submatrix(int row, int col) {
+        Matrix m = new Matrix(this.dimension-1);
+
+        for (int r = 0, tr = 0; r < m.dimension; r++, tr++) {
+            if (tr == row) tr++;
+            for (int c = 0, tc = 0; c < m.dimension; c++, tc++) {
+                if (tc == col) tc++;
+                m.data[r][c] = this.data[tr][tc];
+            }
+        }
+
+        return m;
+    }
+
+    public double minor(int row, int col) {
+        Matrix sub = submatrix(row,col);
+        return sub.determinant();
+    }
+
     public boolean setData(List<List<Double>> listdata) {
         if (listdata.size() != dimension) {
             return false;
