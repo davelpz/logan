@@ -10,9 +10,32 @@ public class Matrix {
     private int dimension;
     private double[][] data;
 
+    public static Matrix identity2 = new Matrix(2,new double[][]{
+            new double[]{1,0},
+            new double[]{0,1},
+    });
+
+    public static Matrix identity3 = new Matrix(3,new double[][]{
+            new double[]{1,0,0},
+            new double[]{0,1,0},
+            new double[]{0,0,1},
+    });
+
+    public static Matrix identity4 = new Matrix(4,new double[][]{
+            new double[]{1,0,0,0},
+            new double[]{0,1,0,0},
+            new double[]{0,0,1,0},
+            new double[]{0,0,0,1},
+    });
+
     public Matrix(int dimension) {
         this.dimension = dimension;
         this.data = new double[dimension][dimension];
+    }
+
+    public Matrix(int dimension, double[][] data) {
+        this.dimension = dimension;
+        this.data = data;
     }
 
     public static Matrix multiply(Matrix a, Matrix b) {

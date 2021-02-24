@@ -164,4 +164,15 @@ public class StepDefinitions {
         assertTrue(t.equals(result));
     }
 
+    @Then("A mul identity_matrix = A")
+    public void a_mul_identity_matrix_a() {
+        Matrix result = Matrix.multiply(a,Matrix.identity4);
+        assertTrue(result.equals(a));
+    }
+
+    @Then("identity_matrix mul tb = tb")
+    public void identity_matrix_mul_tb_tb() {
+        Tuple result = Matrix.multiply(Matrix.identity4,tb);
+        assertTrue(tb.equals(result));
+    }
 }
