@@ -136,6 +136,28 @@ public class Matrix {
         return m2;
     }
 
+    public static Matrix translation(double x, double y, double z) {
+        Matrix m = new Matrix(4);
+        m.set(0,3,x);
+        m.set(1,3,y);
+        m.set(2,3,z);
+
+        m.set(0,0,1.0);
+        m.set(1,1,1.0);
+        m.set(2,2,1.0);
+        m.set(3,3,1.0);
+        return m;
+    }
+
+    public static Matrix scaling(double x, double y, double z) {
+        Matrix m = new Matrix(4);
+        m.set(0,0,x);
+        m.set(1,1,y);
+        m.set(2,2,z);
+        m.set(3,3,1.0);
+        return m;
+    }
+
     public void setData(List<List<Double>> listdata) {
         if (listdata.size() != dimension) {
             throw new RuntimeException("dimension mismatch");
@@ -171,5 +193,9 @@ public class Matrix {
 
     public double get(int row, int col) {
         return this.data[row][col];
+    }
+
+    public void set(int row, int col, double value) {
+        this.data[row][col] = value;
     }
 }

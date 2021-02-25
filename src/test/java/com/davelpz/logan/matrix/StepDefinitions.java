@@ -384,4 +384,64 @@ public class StepDefinitions {
         assertTrue(temp.equals(a));
     }
 
+    Tuple mp;
+    Matrix mtransform;
+    @Given("mp ← point\\({int}, {int}, {int})")
+    public void mp_point(Integer int1, Integer int2, Integer int3) {
+        mp = Tuple.point(int1,int2,int3);
+    }
+
+    @Given("mtransform ← translation\\({int}, {int}, {int})")
+    public void mtransform_translation(Integer int1, Integer int2, Integer int3) {
+        mtransform = Matrix.translation(int1,int2,int3);
+    }
+
+    @Then("mtransform * mp = point\\({int}, {int}, {int})")
+    public void mtransform_mp_point(Integer int1, Integer int2, Integer int3) {
+        Tuple mul = Matrix.multiply(mtransform,mp);
+        assertTrue(mul.equals(Tuple.point(int1,int2,int3)));
+    }
+
+    Matrix inv;
+    @Given("inv ← inverse\\(mtransform)")
+    public void inv_inverse_mtransform() {
+        inv = mtransform.inverse();
+    }
+
+    @Then("inv * mp = point\\({int}, {int}, {int})")
+    public void inv_mp_point(Integer int1, Integer int2, Integer int3) {
+        assertTrue(Matrix.multiply(inv,mp).equals(Tuple.point(int1,int2,int3)));
+    }
+
+    Tuple mv;
+    @Given("mv ← vector\\({int}, {int}, {int})")
+    public void mv_vector(Integer int1, Integer int2, Integer int3) {
+        mv = Tuple.vector(int1,int2,int3);
+    }
+
+    @Then("mtransform * mv = mv")
+    public void mtransform_mv_mv() {
+        assertTrue(Matrix.multiply(mtransform,mv).equals(mv));
+    }
+
+    @Given("mtransform ← scaling\\({int}, {int}, {int})")
+    public void mtransform_scaling(Integer int1, Integer int2, Integer int3) {
+        mtransform = Matrix.scaling(int1,int2,int3);
+    }
+
+    @Then("mtransform mul mp = point\\({int}, {int}, {int})")
+    public void mtransform_mul_mp_point(Integer int1, Integer int2, Integer int3) {
+        assertTrue(Matrix.multiply(mtransform,mp).equals(Tuple.point(int1,int2,int3)));
+    }
+
+    @Then("mtransform * mv = vector\\({int}, {int}, {int})")
+    public void mtransform_mv_vector(Integer int1, Integer int2, Integer int3) {
+        assertTrue(Matrix.multiply(mtransform,mv).equals(Tuple.vector(int1,int2,int3)));
+    }
+
+    @Then("inv * mv = vector\\({int}, {int}, {int})")
+    public void inv_mv_vector(Integer int1, Integer int2, Integer int3) {
+        assertTrue(Matrix.multiply(inv,mv).equals(Tuple.vector(int1,int2,int3)));
+    }
+
 }
