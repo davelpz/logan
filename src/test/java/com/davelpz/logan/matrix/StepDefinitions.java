@@ -6,6 +6,7 @@ import com.davelpz.logan.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.it.Ma;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class StepDefinitions {
-    Matrix a,b,m;
+    Matrix a,b,c,m;
 
     @Given("the following 4x4 matrix M:")
     public void the_following_4x4_matrix_m(io.cucumber.datatable.DataTable dataTable) {
@@ -296,6 +297,86 @@ public class StepDefinitions {
     @Then("cofactor\\(A, {int}, {int}) = {int}")
     public void cofactor_a(Integer int1, Integer int2, Integer int3) {
         assertEquals(a.cofactor(int1,int2), (double) int3, 0.00001);
+    }
+
+    @Then("A is invertible")
+    public void a_is_invertible() {
+        assertTrue(a.isInvertible());
+    }
+
+    @Then("A is not invertible")
+    public void a_is_not_invertible() {
+        assertFalse(a.isInvertible());
+    }
+
+    @Given("B ← inverse\\(A)")
+    public void b_inverse_a() {
+        b = a.inverse();
+    }
+
+    @Then("B[3,2] = {int}\\/{int}")
+    public void b32(Integer int1, Integer int2) {
+        assertEquals(b.get(3,2), (double)int1/(double)int2, 0.00001);
+    }
+
+    @Then("B[2,3] = {int}\\/{int}")
+    public void b23(Integer int1, Integer int2) {
+        assertEquals(b.get(2,3), (double)int1/(double)int2, 0.00001);
+    }
+
+    @Then("B is the following 4x4 matrix:")
+    public void b_is_the_following_4x4_matrix(io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        List<List<Double>> data = dataTable.asLists(Double.TYPE);
+        Matrix expected = new Matrix(4);
+        expected.setData(data);
+        assertTrue(b.equals(expected) );
+    }
+
+    @Then("inverse\\(A) is the following 4x4 matrix:")
+    public void inverse_a_is_the_following_4x4_matrix(io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        List<List<Double>> data = dataTable.asLists(Double.TYPE);
+        Matrix expected = new Matrix(4);
+        expected.setData(data);
+        assertTrue(a.inverse().equals(expected));
+    }
+
+    @Given("the following 4x4 matrix B:")
+    public void the_following_4x4_matrix_b(io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        List<List<Double>> data = dataTable.asLists(Double.TYPE);
+        b = new Matrix(4);
+        b.setData(data);
+    }
+
+    @Given("C ← A mul B")
+    public void c_a_mul_b() {
+        c = Matrix.multiply(a,b);
+    }
+
+    @Then("C mul inverse\\(B) = A")
+    public void c_mul_inverse_b_a() {
+        Matrix temp = Matrix.multiply(c,b.inverse());
+        assertTrue(temp.equals(a));
     }
 
 }

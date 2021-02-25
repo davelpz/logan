@@ -7,26 +7,23 @@ import java.util.List;
 import java.util.Objects;
 
 public class Matrix {
-    private int dimension;
-    private double[][] data;
-
-    public static Matrix identity2 = new Matrix(2,new double[][]{
-            new double[]{1,0},
-            new double[]{0,1},
+    public static Matrix identity2 = new Matrix(2, new double[][]{
+            new double[]{1, 0},
+            new double[]{0, 1},
     });
-
-    public static Matrix identity3 = new Matrix(3,new double[][]{
-            new double[]{1,0,0},
-            new double[]{0,1,0},
-            new double[]{0,0,1},
+    public static Matrix identity3 = new Matrix(3, new double[][]{
+            new double[]{1, 0, 0},
+            new double[]{0, 1, 0},
+            new double[]{0, 0, 1},
     });
-
-    public static Matrix identity4 = new Matrix(4,new double[][]{
-            new double[]{1,0,0,0},
-            new double[]{0,1,0,0},
-            new double[]{0,0,1,0},
-            new double[]{0,0,0,1},
+    public static Matrix identity4 = new Matrix(4, new double[][]{
+            new double[]{1, 0, 0, 0},
+            new double[]{0, 1, 0, 0},
+            new double[]{0, 0, 1, 0},
+            new double[]{0, 0, 0, 1},
     });
+    private final int dimension;
+    private final double[][] data;
 
     public Matrix(int dimension) {
         this.dimension = dimension;
@@ -54,7 +51,7 @@ public class Matrix {
     }
 
     public static Tuple multiply(Matrix a, Tuple b) {
-        Tuple t = new Tuple(0,0,0,0);
+        Tuple t = new Tuple(0, 0, 0, 0);
         double[][] dataA = a.data;
 
         t.setX(dataA[0][0] * b.x() + dataA[0][1] * b.y() + dataA[0][2] * b.z() + dataA[0][3] * b.w());
@@ -78,14 +75,19 @@ public class Matrix {
     }
 
     public double determinant() {
-        if (dimension==2) {
-            return data[0][0]*data[1][1] - data[0][1]*data[1][0];
+        if (dimension == 2) {
+            return data[0][0] * data[1][1] - data[0][1] * data[1][0];
+        } else {
+            double det = 0;
+            for (int column = 0; column < dimension; column++) {
+                det += data[0][column] * cofactor(0, column);
+            }
+            return det;
         }
-        return -1;
     }
 
     public Matrix submatrix(int row, int col) {
-        Matrix m = new Matrix(this.dimension-1);
+        Matrix m = new Matrix(this.dimension - 1);
 
         for (int r = 0, tr = 0; r < m.dimension; r++, tr++) {
             if (tr == row) tr++;
@@ -99,17 +101,39 @@ public class Matrix {
     }
 
     public double minor(int row, int col) {
-        Matrix sub = submatrix(row,col);
+        Matrix sub = submatrix(row, col);
         return sub.determinant();
     }
 
     public double cofactor(int row, int col) {
-        double minor = minor(row,col);
-        if (((row+col) % 2) == 0) {
+        double minor = minor(row, col);
+        if (((row + col) % 2) == 0) {
             return minor;
         } else {
             return -minor;
         }
+    }
+
+    public boolean isInvertible() {
+        return determinant() != 0;
+    }
+
+    public Matrix inverse() {
+        if (!isInvertible()) {
+            throw new InverseException("Matrix not invertible");
+        }
+
+        Matrix m2 = new Matrix(dimension);
+        double det = determinant();
+
+        for (int row = 0; row < dimension; row++) {
+            for (int col = 0; col < dimension; col++) {
+                double c = cofactor(row,col);
+                m2.data[col][row] = c / det;
+            }
+        }
+
+        return m2;
     }
 
     public boolean setData(List<List<Double>> listdata) {
@@ -140,7 +164,7 @@ public class Matrix {
 
         for (int row = 0; row < dimension; row++) {
             for (int col = 0; col < dimension; col++) {
-                if (Math.abs(aData[row][col] - bData[row][col]) > Tuple.EPSILON ){
+                if (Math.abs(aData[row][col] - bData[row][col]) > Tuple.EPSILON) {
                     return false;
                 }
             }
@@ -150,7 +174,8 @@ public class Matrix {
         return true;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -159,7 +184,8 @@ public class Matrix {
         return dimension == matrix.dimension && Arrays.deepEquals(data, matrix.data);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = Objects.hash(dimension);
         result = 31 * result + Arrays.hashCode(data);
         return result;
