@@ -128,7 +128,7 @@ public class Matrix {
 
         for (int row = 0; row < dimension; row++) {
             for (int col = 0; col < dimension; col++) {
-                double c = cofactor(row,col);
+                double c = cofactor(row, col);
                 m2.data[col][row] = c / det;
             }
         }
@@ -136,22 +136,20 @@ public class Matrix {
         return m2;
     }
 
-    public boolean setData(List<List<Double>> listdata) {
+    public void setData(List<List<Double>> listdata) {
         if (listdata.size() != dimension) {
-            return false;
+            throw new RuntimeException("dimension mismatch");
         }
 
         for (int row = 0; row < listdata.size(); row++) {
             List<Double> columns = listdata.get(row);
             if (columns.size() != dimension) {
-                return false;
+                throw new RuntimeException("dimension mismatch");
             }
             for (int col = 0; col < columns.size(); col++) {
                 this.data[row][col] = columns.get(col);
             }
         }
-
-        return true;
     }
 
     public boolean equals(Matrix b) {
@@ -159,12 +157,9 @@ public class Matrix {
             return false;
         }
 
-        double[][] aData = this.data;
-        double[][] bData = b.data;
-
         for (int row = 0; row < dimension; row++) {
             for (int col = 0; col < dimension; col++) {
-                if (Math.abs(aData[row][col] - bData[row][col]) > Tuple.EPSILON) {
+                if (Math.abs(this.data[row][col] - b.data[row][col]) > Tuple.EPSILON) {
                     return false;
                 }
             }
@@ -172,23 +167,6 @@ public class Matrix {
 
         //return Arrays.deepEquals(this.data, b.data);
         return true;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Matrix matrix = (Matrix) o;
-        return dimension == matrix.dimension && Arrays.deepEquals(data, matrix.data);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(dimension);
-        result = 31 * result + Arrays.hashCode(data);
-        return result;
     }
 
     public double get(int row, int col) {

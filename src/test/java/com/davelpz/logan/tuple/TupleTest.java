@@ -26,6 +26,7 @@ public class TupleTest {
         assertEquals(6.0, a.z(), Tuple.EPSILON);
         Tuple w = a.setW(7);
         assertEquals(7.0, a.w(), Tuple.EPSILON);
+        assertEquals("Tuple{values=[4.0, 5.0, 6.0, 7.0]}",w.toString());
     }
 
     @Test

@@ -306,6 +306,11 @@ public class StepDefinitions {
 
     @Then("A is not invertible")
     public void a_is_not_invertible() {
+        try {
+            a.inverse();
+        } catch (InverseException e) {
+
+        }
         assertFalse(a.isInvertible());
     }
 
