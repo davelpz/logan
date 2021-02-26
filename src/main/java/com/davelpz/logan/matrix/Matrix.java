@@ -158,6 +158,54 @@ public class Matrix {
         return m;
     }
 
+    public static Matrix rotationX(double r) {
+        Matrix m = new Matrix(4);
+        m.set(0,0,1.0);
+        m.set(1,1, Math.cos(r));
+        m.set(2,2, Math.cos(r));
+        m.set(3,3,1.0);
+        m.set(2,1, Math.sin(r));
+        m.set(1,2, -Math.sin(r));
+        return m;
+    }
+
+    public static Matrix rotationY(double r) {
+        Matrix m = new Matrix(4);
+        m.set(0,0, Math.cos(r));
+        m.set(1,1, 1);
+        m.set(2,2, Math.cos(r));
+        m.set(3,3,1.0);
+        m.set(2,0, -Math.sin(r));
+        m.set(0,2, Math.sin(r));
+        return m;
+    }
+
+    public static Matrix rotationZ(double r) {
+        Matrix m = new Matrix(4);
+        m.set(0,0, Math.cos(r));
+        m.set(1,1, Math.cos(r));
+        m.set(2,2, 1.0);
+        m.set(3,3, 1.0);
+        m.set(1,0, Math.sin(r));
+        m.set(0,1, -Math.sin(r));
+        return m;
+    }
+
+    public static Matrix shearing(double xy, double xz, double yx, double yz, double zx, double zy) {
+        Matrix m = new Matrix(4);
+        m.set(0,0, 1.0);
+        m.set(1,1, 1.0);
+        m.set(2,2, 1.0);
+        m.set(3,3, 1.0);
+        m.set(0,1, xy);
+        m.set(0,2, xz);
+        m.set(1,0, yx);
+        m.set(1,2, yz);
+        m.set(2,0, zx);
+        m.set(2,1, zy);
+        return m;
+    }
+
     public void setData(List<List<Double>> listdata) {
         if (listdata.size() != dimension) {
             throw new RuntimeException("dimension mismatch");

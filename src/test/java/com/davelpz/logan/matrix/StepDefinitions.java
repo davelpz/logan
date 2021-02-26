@@ -1,14 +1,9 @@
 package com.davelpz.logan.matrix;
 
-import com.davelpz.logan.canvas.Canvas;
-import com.davelpz.logan.color.Color;
 import com.davelpz.logan.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import io.cucumber.java.it.Ma;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -442,6 +437,75 @@ public class StepDefinitions {
     @Then("inv * mv = vector\\({int}, {int}, {int})")
     public void inv_mv_vector(Integer int1, Integer int2, Integer int3) {
         assertTrue(Matrix.multiply(inv,mv).equals(Tuple.vector(int1,int2,int3)));
+    }
+
+    Matrix half_quarter;
+    @Given("half_quarter ← rotation_x\\(π \\/ {int})")
+    public void half_quarter_rotation_x_π(Integer int1) {
+        half_quarter = Matrix.rotationX(Math.PI / int1);
+    }
+
+    Matrix full_quarter;
+    @Given("full_quarter ← rotation_x\\(π \\/ {int})")
+    public void full_quarter_rotation_x_π(Integer int1) {
+        full_quarter = Matrix.rotationX(Math.PI / int1);
+    }
+
+    @Then("half_quarter * mp = point\\({int}, {double}, {double})")
+    public void half_quarter_mp_point(Integer int1, Double double1, Double double2) {
+        Tuple tp = Tuple.point(int1, double1, double2);
+        assertTrue(Matrix.multiply(half_quarter,mp).equals(tp));
+    }
+
+    @Given("inv ← inverse\\(half_quarter)")
+    public void inv_inverse_half_quarter() {
+        inv = half_quarter.inverse();
+    }
+
+    @Then("inv mul mp = point\\({double}, {double}, {double})")
+    public void inv_mul_mp_point(Double double1, Double double2, Double double3) {
+        Tuple tp = Tuple.point(double1, double2, double3);
+        Tuple tmp = Matrix.multiply(inv,mp);
+        assertTrue(tmp.equals(tp));
+    }
+
+    @Given("half_quarter ← rotation_y\\(π \\/ {int})")
+    public void half_quarter_rotation_y_π(Integer int1) {
+        half_quarter = Matrix.rotationY(Math.PI / int1);
+    }
+
+    @Given("full_quarter ← rotation_y\\(π \\/ {int})")
+    public void full_quarter_rotation_y_π(Integer int1) {
+        full_quarter = Matrix.rotationY(Math.PI / int1);
+    }
+
+    @Then("half_quarter mul mp = point\\({double}, {double}, {double})")
+    public void half_quarter_mul_mp_point(Double double1, Double double2, Double double3) {
+        Tuple tp = Tuple.point(double1, double2, double3);
+        Tuple tmp = Matrix.multiply(half_quarter,mp);
+        assertTrue(tmp.equals(tp));
+    }
+
+    @Then("full_quarter mul mp = point\\({double}, {double}, {double})")
+    public void full_quarter_mul_mp_point(Double double1, Double double2, Double double3) {
+        Tuple tp = Tuple.point(double1, double2, double3);
+        Tuple tmp = Matrix.multiply(full_quarter,mp);
+        assertTrue(tmp.equals(tp));
+    }
+
+    @Given("half_quarter ← rotation_z\\(π \\/ {int})")
+    public void half_quarter_rotation_z_π(Integer int1) {
+        half_quarter = Matrix.rotationZ(Math.PI / int1);
+    }
+
+    @Given("full_quarter ← rotation_z\\(π \\/ {int})")
+    public void full_quarter_rotation_z_π(Integer int1) {
+        full_quarter = Matrix.rotationZ(Math.PI / int1);
+    }
+
+    @Given("mtransform ← shearing\\({int}, {int}, {int}, {int}, {int}, {int})")
+    public void mtransform_shearing(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5, Integer int6) {
+        mtransform = Matrix.shearing(int1,int2,int3,int4,int5,int6);
     }
 
 }
