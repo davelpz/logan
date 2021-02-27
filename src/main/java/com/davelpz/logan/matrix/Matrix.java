@@ -2,26 +2,13 @@ package com.davelpz.logan.matrix;
 
 import com.davelpz.logan.tuple.Tuple;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class Matrix {
-    public static Matrix identity2 = new Matrix(2, new double[][]{
-            new double[]{1, 0},
-            new double[]{0, 1},
-    });
-    public static Matrix identity3 = new Matrix(3, new double[][]{
-            new double[]{1, 0, 0},
-            new double[]{0, 1, 0},
-            new double[]{0, 0, 1},
-    });
-    public static Matrix identity4 = new Matrix(4, new double[][]{
-            new double[]{1, 0, 0, 0},
-            new double[]{0, 1, 0, 0},
-            new double[]{0, 0, 1, 0},
-            new double[]{0, 0, 0, 1},
-    });
+    public static Matrix identity2 = new Matrix(2, new double[][] { new double[] { 1, 0 }, new double[] { 0, 1 }, });
+    public static Matrix identity3 = new Matrix(3, new double[][] { new double[] { 1, 0, 0 }, new double[] { 0, 1, 0 }, new double[] { 0, 0, 1 }, });
+    public static Matrix identity4 = new Matrix(4,
+            new double[][] { new double[] { 1, 0, 0, 0 }, new double[] { 0, 1, 0, 0 }, new double[] { 0, 0, 1, 0 }, new double[] { 0, 0, 0, 1 }, });
     private final int dimension;
     private final double[][] data;
 
@@ -74,6 +61,84 @@ public class Matrix {
         return m;
     }
 
+    public static Matrix translation(double x, double y, double z) {
+        Matrix m = new Matrix(4);
+        m.set(0, 3, x);
+        m.set(1, 3, y);
+        m.set(2, 3, z);
+
+        m.set(0, 0, 1.0);
+        m.set(1, 1, 1.0);
+        m.set(2, 2, 1.0);
+        m.set(3, 3, 1.0);
+        return m;
+    }
+
+    public static Matrix scaling(double x, double y, double z) {
+        Matrix m = new Matrix(4);
+        m.set(0, 0, x);
+        m.set(1, 1, y);
+        m.set(2, 2, z);
+        m.set(3, 3, 1.0);
+        return m;
+    }
+
+    public static Matrix rotationX(double r) {
+        Matrix m = new Matrix(4);
+        m.set(0, 0, 1.0);
+        m.set(1, 1, Math.cos(r));
+        m.set(2, 2, Math.cos(r));
+        m.set(3, 3, 1.0);
+        m.set(2, 1, Math.sin(r));
+        m.set(1, 2, -Math.sin(r));
+        return m;
+    }
+
+    public static Matrix rotationY(double r) {
+        Matrix m = new Matrix(4);
+        m.set(0, 0, Math.cos(r));
+        m.set(1, 1, 1);
+        m.set(2, 2, Math.cos(r));
+        m.set(3, 3, 1.0);
+        m.set(2, 0, -Math.sin(r));
+        m.set(0, 2, Math.sin(r));
+        return m;
+    }
+
+    public static Matrix rotationZ(double r) {
+        Matrix m = new Matrix(4);
+        m.set(0, 0, Math.cos(r));
+        m.set(1, 1, Math.cos(r));
+        m.set(2, 2, 1.0);
+        m.set(3, 3, 1.0);
+        m.set(1, 0, Math.sin(r));
+        m.set(0, 1, -Math.sin(r));
+        return m;
+    }
+
+    public static Matrix shearing(double xy, double xz, double yx, double yz, double zx, double zy) {
+        Matrix m = new Matrix(4);
+        m.set(0, 0, 1.0);
+        m.set(1, 1, 1.0);
+        m.set(2, 2, 1.0);
+        m.set(3, 3, 1.0);
+        m.set(0, 1, xy);
+        m.set(0, 2, xz);
+        m.set(1, 0, yx);
+        m.set(1, 2, yz);
+        m.set(2, 0, zx);
+        m.set(2, 1, zy);
+        return m;
+    }
+
+    public Matrix multiply(Matrix b) {
+        return multiply(this, b);
+    }
+
+    public Tuple multiply(Tuple b) {
+        return multiply(this, b);
+    }
+
     public double determinant() {
         if (dimension == 2) {
             return data[0][0] * data[1][1] - data[0][1] * data[1][0];
@@ -90,9 +155,11 @@ public class Matrix {
         Matrix m = new Matrix(this.dimension - 1);
 
         for (int r = 0, tr = 0; r < m.dimension; r++, tr++) {
-            if (tr == row) tr++;
+            if (tr == row)
+                tr++;
             for (int c = 0, tc = 0; c < m.dimension; c++, tc++) {
-                if (tc == col) tc++;
+                if (tc == col)
+                    tc++;
                 m.data[r][c] = this.data[tr][tc];
             }
         }
@@ -134,76 +201,6 @@ public class Matrix {
         }
 
         return m2;
-    }
-
-    public static Matrix translation(double x, double y, double z) {
-        Matrix m = new Matrix(4);
-        m.set(0,3,x);
-        m.set(1,3,y);
-        m.set(2,3,z);
-
-        m.set(0,0,1.0);
-        m.set(1,1,1.0);
-        m.set(2,2,1.0);
-        m.set(3,3,1.0);
-        return m;
-    }
-
-    public static Matrix scaling(double x, double y, double z) {
-        Matrix m = new Matrix(4);
-        m.set(0,0,x);
-        m.set(1,1,y);
-        m.set(2,2,z);
-        m.set(3,3,1.0);
-        return m;
-    }
-
-    public static Matrix rotationX(double r) {
-        Matrix m = new Matrix(4);
-        m.set(0,0,1.0);
-        m.set(1,1, Math.cos(r));
-        m.set(2,2, Math.cos(r));
-        m.set(3,3,1.0);
-        m.set(2,1, Math.sin(r));
-        m.set(1,2, -Math.sin(r));
-        return m;
-    }
-
-    public static Matrix rotationY(double r) {
-        Matrix m = new Matrix(4);
-        m.set(0,0, Math.cos(r));
-        m.set(1,1, 1);
-        m.set(2,2, Math.cos(r));
-        m.set(3,3,1.0);
-        m.set(2,0, -Math.sin(r));
-        m.set(0,2, Math.sin(r));
-        return m;
-    }
-
-    public static Matrix rotationZ(double r) {
-        Matrix m = new Matrix(4);
-        m.set(0,0, Math.cos(r));
-        m.set(1,1, Math.cos(r));
-        m.set(2,2, 1.0);
-        m.set(3,3, 1.0);
-        m.set(1,0, Math.sin(r));
-        m.set(0,1, -Math.sin(r));
-        return m;
-    }
-
-    public static Matrix shearing(double xy, double xz, double yx, double yz, double zx, double zy) {
-        Matrix m = new Matrix(4);
-        m.set(0,0, 1.0);
-        m.set(1,1, 1.0);
-        m.set(2,2, 1.0);
-        m.set(3,3, 1.0);
-        m.set(0,1, xy);
-        m.set(0,2, xz);
-        m.set(1,0, yx);
-        m.set(1,2, yz);
-        m.set(2,0, zx);
-        m.set(2,1, zy);
-        return m;
     }
 
     public void setData(List<List<Double>> listdata) {

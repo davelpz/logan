@@ -3,6 +3,7 @@ package com.davelpz.logan.matrix;
 import com.davelpz.logan.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
 
@@ -370,12 +371,12 @@ public class StepDefinitions {
 
     @Given("C ← A mul B")
     public void c_a_mul_b() {
-        c = Matrix.multiply(a,b);
+        c = a.multiply(b);
     }
 
     @Then("C mul inverse\\(B) = A")
     public void c_mul_inverse_b_a() {
-        Matrix temp = Matrix.multiply(c,b.inverse());
+        Matrix temp = c.multiply(b.inverse());
         assertTrue(temp.equals(a));
     }
 
@@ -506,6 +507,53 @@ public class StepDefinitions {
     @Given("mtransform ← shearing\\({int}, {int}, {int}, {int}, {int}, {int})")
     public void mtransform_shearing(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5, Integer int6) {
         mtransform = Matrix.shearing(int1,int2,int3,int4,int5,int6);
+    }
+
+    @Given("A ← rotation_x\\(π \\/ {int})")
+    public void a_rotation_x_π(Integer int1) {
+        a = Matrix.rotationX(Math.PI / int1);
+    }
+
+    @Given("B ← scaling\\({int}, {int}, {int})")
+    public void b_scaling(Integer int1, Integer int2, Integer int3) {
+        b = Matrix.scaling(int1,int2,int3);
+    }
+
+    @Given("C ← translation\\({int}, {int}, {int})")
+    public void c_translation(Integer int1, Integer int2, Integer int3) {
+        c = Matrix.translation(int1,int2,int3);
+    }
+
+    Tuple p2,p3,p4;
+    @When("p2 ← A * mp")
+    public void p2_a_mp() {
+        p2 = Matrix.multiply(a,mp);
+        p2 = a.multiply(mp);
+    }
+
+    @Then("p2 = point\\({int}, {int}, {int})")
+    public void p2_point(Integer int1, Integer int2, Integer int3) {
+        assertTrue(p2.equals(Tuple.point(int1,int2,int3)));
+    }
+
+    @When("p3 ← B * p2")
+    public void p3_b_p2() {
+        p3 = b.multiply(p2);
+    }
+
+    @Then("p3 = point\\({int}, {int}, {int})")
+    public void p3_point(Integer int1, Integer int2, Integer int3) {
+        assertTrue(p3.equals(Tuple.point(int1,int2,int3)));
+    }
+
+    @When("p4 ← C * p3")
+    public void p4_c_p3() {
+        p4 = c.multiply(p3);
+    }
+
+    @Then("p4 = point\\({int}, {int}, {int})")
+    public void p4_point(Integer int1, Integer int2, Integer int3) {
+        assertTrue(p4.equals(Tuple.point(int1,int2,int3)));
     }
 
 }
