@@ -131,6 +131,10 @@ public class Matrix {
         return m;
     }
 
+    public Matrix transpose() {
+        return Matrix.transpose(this);
+    }
+
     public Matrix multiply(Matrix b) {
         return multiply(this, b);
     }
