@@ -556,4 +556,17 @@ public class StepDefinitions {
         assertTrue(p4.equals(Tuple.point(int1,int2,int3)));
     }
 
+    Matrix t;
+    @When("T ← C * B * A")
+    public void t_c_b_a() {
+        t = c.multiply(b).multiply(a);
+    }
+
+    @Then("T * mp = point\\({int}, {int}, {int})")
+    public void t_mp_point(Integer int1, Integer int2, Integer int3) {
+        Tuple tp = Tuple.point(int1,int2,int3);
+        Tuple tmp = Matrix.multiply(t,mp);
+        assertTrue(tmp.equals(tp));
+    }
+
 }
