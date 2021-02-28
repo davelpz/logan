@@ -1,12 +1,15 @@
 package com.davelpz.logan.matrix;
 
+import com.davelpz.logan.ray.IntersectRecord;
 import com.davelpz.logan.ray.Ray;
+import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static com.davelpz.logan.tuple.Tuple.point;
@@ -643,4 +646,33 @@ public class StepDefinitions {
         m = Matrix.scaling(int1,int2,int3);
     }
 
+    Sphere s;
+    @Given("s ← sphere")
+    public void s_sphere() {
+        s = new Sphere();
+    }
+
+    Optional<IntersectRecord> xs;
+    @When("xs ← intersect\\(s, r)")
+    public void xs_intersect_s_r() {
+        xs = r.intersects(s);
+    }
+
+    @Then("xs.count = {int}")
+    public void xs_count(Integer int1) {
+        if (int1 == 2) {
+            assertTrue(xs.isPresent());
+        } else {
+            assertFalse(xs.isPresent());
+        }
+    }
+
+    @Then("xs[{int}] = {double}")
+    public void xs(Integer int1, Double double1) {
+        if (int1==0) {
+            assertTrue(xs.get().t1 == double1);
+        } else {
+            assertTrue(xs.get().t2 == double1);
+        }
+    }
 }

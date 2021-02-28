@@ -1,9 +1,11 @@
 package com.davelpz.logan.ray;
 
 import com.davelpz.logan.matrix.Matrix;
+import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class Ray {
     public Tuple origin;
@@ -20,6 +22,27 @@ public class Ray {
 
     public Ray transform(Matrix m) {
         return new Ray(m.multiply(this.origin),m.multiply(this.direction));
+    }
+
+    public Optional<IntersectRecord> intersects(Sphere s) {
+        Tuple sphere_to_ray = Tuple.subtract(origin,s.center);
+        double a = Tuple.dot(direction,direction);
+        double b = 2 * Tuple.dot(direction,sphere_to_ray);
+        double c = Tuple.dot(sphere_to_ray,sphere_to_ray) - 1;
+        double discriminant = (b*b) - 4 * a * c;
+
+        if (discriminant < 0) {
+            return Optional.empty();
+        }
+
+        double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
+        double t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
+
+        if (t1 < t2) {
+            return Optional.of(new IntersectRecord(t1,t2));
+        } else {
+            return Optional.of(new IntersectRecord(t2,t1));
+        }
     }
 
     public Tuple getOrigin() {
