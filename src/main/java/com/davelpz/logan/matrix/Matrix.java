@@ -247,4 +247,54 @@ public class Matrix {
     public void set(int row, int col, double value) {
         this.data[row][col] = value;
     }
+
+    public static class MatrixBatcher {
+        private Matrix m = Matrix.identity4;
+
+        public MatrixBatcher() {
+        }
+
+        public MatrixBatcher transpose() {
+            m =  m.transpose();
+            return this;
+        }
+
+        public MatrixBatcher translation(double x, double y, double z) {
+            m = m.multiply(Matrix.translation(x,y,z));
+            return this;
+        }
+
+        public MatrixBatcher scaling(double x, double y, double z) {
+            m = m.multiply(Matrix.scaling(x,y,z));
+            return this;
+        }
+
+        public MatrixBatcher rotationX(double r) {
+            m = m.multiply(Matrix.rotationX(r));
+            return this;
+        }
+
+        public MatrixBatcher rotationY(double r) {
+            m = m.multiply(Matrix.rotationY(r));
+            return this;
+        }
+
+        public MatrixBatcher rotationZ(double r) {
+            m = m.multiply(Matrix.rotationZ(r));
+            return this;
+        }
+
+        public MatrixBatcher shearing(double xy, double xz, double yx, double yz, double zx, double zy) {
+            m = m.multiply(Matrix.shearing(xy,xz,yx,yz,zx,zy));
+            return this;
+        }
+
+        public Matrix end() {
+            return m;
+        }
+    }
+
+    public static MatrixBatcher start() {
+        return new Matrix.MatrixBatcher();
+    }
 }

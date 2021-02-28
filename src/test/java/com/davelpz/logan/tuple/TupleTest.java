@@ -2,7 +2,6 @@ package com.davelpz.logan.tuple;
 
 import com.davelpz.logan.canvas.Canvas;
 import com.davelpz.logan.color.Color;
-import io.cucumber.java.an.E;
 import org.junit.Test;
 
 import java.io.IOException;
