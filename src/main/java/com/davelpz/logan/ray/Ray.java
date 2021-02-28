@@ -24,7 +24,7 @@ public class Ray {
         return new Ray(m.multiply(this.origin),m.multiply(this.direction));
     }
 
-    public Optional<IntersectRecord> intersects(Sphere s) {
+    public Intersection[] intersects(Sphere s) {
         Tuple sphere_to_ray = Tuple.subtract(origin,s.center);
         double a = Tuple.dot(direction,direction);
         double b = 2 * Tuple.dot(direction,sphere_to_ray);
@@ -32,16 +32,16 @@ public class Ray {
         double discriminant = (b*b) - 4 * a * c;
 
         if (discriminant < 0) {
-            return Optional.empty();
+            return new Intersection[0];
         }
 
         double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
         double t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
 
         if (t1 < t2) {
-            return Optional.of(new IntersectRecord(t1,t2));
+            return Intersection.intersections(new Intersection(t1,s),new Intersection(t2,s));
         } else {
-            return Optional.of(new IntersectRecord(t2,t1));
+            return Intersection.intersections(new Intersection(t2,s),new Intersection(t1,s));
         }
     }
 
