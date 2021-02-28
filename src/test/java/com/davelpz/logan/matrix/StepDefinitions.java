@@ -1,5 +1,6 @@
 package com.davelpz.logan.matrix;
 
+import com.davelpz.logan.ray.Ray;
 import com.davelpz.logan.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,6 +9,8 @@ import io.cucumber.java.en.When;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static com.davelpz.logan.tuple.Tuple.point;
+import static com.davelpz.logan.tuple.Tuple.vector;
 
 public class StepDefinitions {
     Matrix a,b,c,m;
@@ -304,9 +307,7 @@ public class StepDefinitions {
     public void a_is_not_invertible() {
         try {
             a.inverse();
-        } catch (InverseException e) {
-
-        }
+        } catch (InverseException ignored) { }
         assertFalse(a.isInvertible());
     }
 
@@ -567,6 +568,79 @@ public class StepDefinitions {
         Tuple tp = Tuple.point(int1,int2,int3);
         Tuple tmp = Matrix.multiply(t,mp);
         assertTrue(tmp.equals(tp));
+    }
+
+    /*
+     *
+     * Rays.feature
+     *
+     */
+
+    Tuple origin, direction;
+    Ray r;
+    @Given("origin ← point\\({double}, {double}, {double})")
+    public void origin_point(Double double1, Double double2, Double double3) {
+        origin = point(double1,double2,double3);
+    }
+
+    @Given("direction ← vector\\({double}, {double}, {double})")
+    public void direction_vector(Double double1, Double double2, Double double3) {
+        direction = vector(double1,double2,double3);
+    }
+
+    @When("r ← ray\\(origin, direction)")
+    public void r_ray_origin_direction() {
+        r = new Ray(origin,direction);
+    }
+
+    @Then("r.origin = origin")
+    public void r_origin_origin() {
+        assertTrue(r.origin.equals(origin));
+    }
+
+    @Then("r.direction = direction")
+    public void r_direction_direction() {
+        assertTrue(r.direction.equals(direction));
+    }
+
+    @Given("r ← ray\\(point-{int}-{int}-{int}, vector-{int}-{int}-{int})")
+    public void r_ray_point_vector(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5, Integer int6) {
+        r = new Ray(point(int1,int2,int3),vector(int4,int5,int6));
+    }
+
+    @Then("position\\(r, {double}) = point\\({double}, {double}, {double})")
+    public void position_r_point(Double double1, Double double2, Double double3, Double double4) {
+        Tuple t = r.position(double1);
+        Tuple p = point(double2,double3,double4);
+        assertTrue(t.equals(p));
+    }
+
+    @Given("m ← translation\\({int}, {int}, {int})")
+    public void m_translation(Integer int1, Integer int2, Integer int3) {
+        m = Matrix.translation(int1,int2,int3);
+    }
+
+    Ray r2;
+    @When("r2 ← transform\\(r, m)")
+    public void r2_transform_r_m() {
+        r2 = r.transform(m);
+    }
+
+    @Then("r2.origin = point\\({int}, {int}, {int})")
+    public void r2_origin_point(Integer int1, Integer int2, Integer int3) {
+        Tuple t = point(int1,int2,int3);
+        assertTrue(r2.origin.equals(t));
+    }
+
+    @Then("r2.direction = vector\\({int}, {int}, {int})")
+    public void r2_direction_vector(Integer int1, Integer int2, Integer int3) {
+        Tuple t = vector(int1,int2,int3);
+        assertTrue(r2.direction.equals(t));
+    }
+
+    @Given("m ← scaling\\({int}, {int}, {int})")
+    public void m_scaling(Integer int1, Integer int2, Integer int3) {
+        m = Matrix.scaling(int1,int2,int3);
     }
 
 }
