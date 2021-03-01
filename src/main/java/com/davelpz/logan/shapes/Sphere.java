@@ -44,6 +44,14 @@ public class Sphere {
         this.transform = transform;
     }
 
+    public Tuple normalAt(Tuple world_point) {
+        Tuple object_point = this.transform.inverse().multiply(world_point);
+        Tuple object_normal = object_point.subtract(Tuple.point(0,0,0));
+        Tuple world_normal = transform.inverse().transpose().multiply(object_normal);
+        world_normal.setW(0);
+        return world_normal.normalize();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

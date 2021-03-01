@@ -107,19 +107,11 @@ public class Tuple {
     }
 
     public Tuple add(Tuple b) {
-        values[0] += b.x();
-        values[1] += b.y();
-        values[2] += b.z();
-        values[3] += b.w();
-        return this;
+        return add(this,b);
     }
 
     public Tuple subtract(Tuple b) {
-        values[0] -= b.x();
-        values[1] -= b.y();
-        values[2] -= b.z();
-        values[3] -= b.w();
-        return this;
+        return subtract(this,b);
     }
 
     public Tuple negate() {
@@ -127,19 +119,11 @@ public class Tuple {
     }
 
     public Tuple mul(double b) {
-        setX(x() * b);
-        setY(y() * b);
-        setZ(z() * b);
-        setW(w() * b);
-        return this;
+        return mul(this,b);
     }
 
     public Tuple div(double b) {
-        setX(x() / b);
-        setY(y() / b);
-        setZ(z() / b);
-        setW(w() / b);
-        return this;
+        return div(this,b);
     }
 
     public double magnitude() {
