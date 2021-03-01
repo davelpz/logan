@@ -2,6 +2,7 @@ package com.davelpz.logan;
 
 import com.davelpz.logan.canvas.Canvas;
 import com.davelpz.logan.color.Color;
+import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.ray.Intersection;
 import com.davelpz.logan.ray.Ray;
 import com.davelpz.logan.shapes.Sphere;
@@ -21,6 +22,7 @@ public class Renderer {
         Canvas canvas = new Canvas(canvas_pixels, canvas_pixels);
         Color color = new Color(1, 0, 0);
         Sphere shape = new Sphere();
+        shape.setTransform(Matrix.multiply(Matrix.shearing(1,0,0,0,0,0),Matrix.scaling(0.5,1,1)));
 
         for (int y = 0; y < canvas_pixels; y++) {
             double world_y = half - pixel_size * y;
