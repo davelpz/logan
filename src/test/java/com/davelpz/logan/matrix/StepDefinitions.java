@@ -762,4 +762,24 @@ public class StepDefinitions {
         assertTrue(i.equals(i4));
     }
 
+    @Then("s.transform = identity_matrix")
+    public void s_transform_identity_matrix() {
+        assertTrue(s.getTransform().equals(Matrix.identity4));
+    }
+
+    @Given("t ← translation\\({int}, {int}, {int})")
+    public void t_translation(Integer int1, Integer int2, Integer int3) {
+        t = Matrix.translation(int1,int2,int3);
+    }
+
+    @When("set_transform\\(s, t)")
+    public void set_transform_s_t() {
+        s.setTransform(t);
+    }
+
+    @Then("s.transform = t")
+    public void s_transform_t() {
+        assertTrue(s.getTransform().equals(t));
+    }
+
 }

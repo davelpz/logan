@@ -1,5 +1,6 @@
 package com.davelpz.logan.shapes;
 
+import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.tuple.Tuple;
 
 import java.util.Objects;
@@ -7,6 +8,7 @@ import java.util.Objects;
 public class Sphere {
     public Tuple center;
     public double radius;
+    public Matrix transform = Matrix.identity4;
 
     public Sphere() {
         this.center = Tuple.point(0,0,0);
@@ -32,6 +34,14 @@ public class Sphere {
 
     public void setRadius(double radius) {
         this.radius = radius;
+    }
+
+    public Matrix getTransform() {
+        return transform;
+    }
+
+    public void setTransform(Matrix transform) {
+        this.transform = transform;
     }
 
     @Override
