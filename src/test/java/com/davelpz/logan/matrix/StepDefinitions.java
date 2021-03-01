@@ -7,8 +7,10 @@ import com.davelpz.logan.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.sl.In;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static com.davelpz.logan.tuple.Tuple.point;
@@ -671,4 +673,93 @@ public class StepDefinitions {
     public void xs_object_s(Integer int1) {
         assertTrue(xs[int1].object.equals(s));
     }
+
+    Intersection i;
+    @When("i ← intersection\\({double}, s)")
+    public void i_intersection_s(Double double1) {
+        i = new Intersection(double1,s);
+    }
+
+    @Then("i.t = {double}")
+    public void i_t(Double double1) {
+        assertTrue(i.t == double1);
+    }
+
+    @Then("i.object = s")
+    public void i_object_s() {
+        assertTrue(i.object.equals(s));
+    }
+
+    Intersection i1,i2;
+    @Given("i1 ← intersection\\({int}, s)")
+    public void i1_intersection_s(Integer int1) {
+        i1 = new Intersection(int1,s);
+    }
+
+    @Given("i2 ← intersection\\({int}, s)")
+    public void i2_intersection_s(Integer int1) {
+        i2 = new Intersection(int1,s);
+    }
+
+    @When("xs ← intersections\\(i1, i2)")
+    public void xs_intersections_i1_i2() {
+        xs = Intersection.intersections(i1,i2);
+    }
+
+    @Then("xs[{int}].t = {int}")
+    public void xs_t(Integer int1, Integer int2) {
+        assertTrue(xs[int1].t == int2);
+    }
+
+    @Given("xs ← intersections\\(i2, i1)")
+    public void xs_intersections_i2_i1() {
+        xs = Intersection.intersections(i2,i1);
+    }
+
+    @When("i ← hit\\(xs)")
+    public void i_hit_xs() {
+        Optional<Intersection> ti = Intersection.hit(xs);
+        if (ti.isPresent()) {
+            i = ti.get();
+        } else {
+            i = null;
+        }
+    }
+
+    @Then("i = i1")
+    public void i_i1() {
+        assertTrue(i.equals(i1));
+    }
+
+    @Then("i = i2")
+    public void i_i2() {
+        assertTrue(i.equals(i2));
+    }
+
+    @Then("i is nothing")
+    public void i_is_nothing() {
+        assertNull(i);
+    }
+
+    Intersection i3,i4;
+    @Given("i3 ← intersection\\({int}, s)")
+    public void i3_intersection_s(Integer int1) {
+        i3 = new Intersection(int1,s);
+    }
+
+    @Given("i4 ← intersection\\({int}, s)")
+    public void i4_intersection_s(Integer int1) {
+        i4 = new Intersection(int1,s);
+    }
+
+    @Given("xs ← intersections\\(i1, i2, i3, i4)")
+    public void xs_intersections_i1_i2_i3_i4() {
+        xs = Intersection.intersections(i1,i2,i3,i4);
+    }
+
+    @Then("i = i4")
+    public void i_i4() {
+        assertTrue(i.equals(i4));
+    }
+
 }
