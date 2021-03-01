@@ -16,7 +16,6 @@ public class Intersection {
     }
 
     public static Intersection[] intersections(Intersection ...vals) {
-        Arrays.sort(vals);
         return vals;
     }
 

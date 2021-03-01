@@ -782,4 +782,13 @@ public class StepDefinitions {
         assertTrue(s.getTransform().equals(t));
     }
 
+    @When("set_transform\\(s, scaling-{int}-{int}-{int})")
+    public void set_transform_s_scaling(Integer int1, Integer int2, Integer int3) {
+        s.setTransform(Matrix.scaling(int1,int2,int3));
+    }
+
+    @When("set_transform\\(s, translation-{int}-{int}-{int})")
+    public void set_transform_s_translation(Integer int1, Integer int2, Integer int3) {
+        s.setTransform(Matrix.translation(int1,int2,int3));
+    }
 }
