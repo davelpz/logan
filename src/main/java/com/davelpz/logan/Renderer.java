@@ -9,6 +9,7 @@ import com.davelpz.logan.ray.Intersection;
 import com.davelpz.logan.ray.Ray;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
+import com.davelpz.logan.util.PixelStream;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -32,6 +33,25 @@ public class Renderer {
         Color light_color = new Color(1,1,1);
         PointLight light = new PointLight(light_color,light_position);
 
+        PixelStream.genStream(canvas_pixels,canvas_pixels).parallel().forEach(p -> {
+            double world_y = half - pixel_size * p.y;
+            double world_x = -half + pixel_size * p.x;
+            Tuple position = Tuple.point(world_x, world_y, wall_z);
+            Ray r = new Ray(ray_origin, Tuple.subtract(position, ray_origin).normalize());
+            Intersection[] xs = r.intersects(shape);
+            Optional<Intersection> hitOpt = Intersection.hit(xs);
+            if (hitOpt.isPresent()) {
+                Intersection hit = hitOpt.get();
+                Tuple point = r.position(hit.t);
+                Tuple normal = hit.object.normalAt(point);
+                Tuple eye = r.direction.negate();
+                Color adjustedColor = Material.lighting(hit.object.material,light,point,eye,normal);
+                canvas.writePixel(adjustedColor, p.x, p.y);
+            }
+
+        });
+
+        /*
         for (int y = 0; y < canvas_pixels; y++) {
             double world_y = half - pixel_size * y;
 
@@ -50,7 +70,7 @@ public class Renderer {
                     canvas.writePixel(adjustedColor, x, y);
                 }
             }
-        }
+        }*/
 
         canvas.canvasToPPMFile("output.ppm");
     }
