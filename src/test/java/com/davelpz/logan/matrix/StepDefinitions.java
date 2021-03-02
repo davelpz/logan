@@ -791,4 +791,31 @@ public class StepDefinitions {
     public void set_transform_s_translation(Integer int1, Integer int2, Integer int3) {
         s.setTransform(Matrix.translation(int1,int2,int3));
     }
+
+    Tuple n;
+    @When("n ← normal_at\\(s, point-{double}-{double}-{double})")
+    public void n_normal_at_s_point(Double int1, Double int2, Double int3) {
+        n = s.normalAt(Tuple.point(int1,int2,int3));
+    }
+
+    @Then("n = vector\\({double}, {double}, {double})")
+    public void n_vector(Double int1, Double int2, Double int3) {
+        assertTrue(n.equals(Tuple.vector(int1,int2,int3)));
+    }
+
+    @Then("n = normalize\\(n)")
+    public void n_normalize_n() {
+        assertTrue(n.equals(n.normalize()));
+    }
+
+    @Given("m ← scaling\\({double}, {double}, {double}) * rotation_z\\({double})")
+    public void m_scaling_rotation_z(Double double1, Double double2, Double double3, Double double4) {
+        m = Matrix.scaling(double1,double2,double3).multiply(Matrix.rotationZ(Math.PI/double4));
+    }
+
+    @Given("set_transform\\(s, m)")
+    public void set_transform_s_m() {
+        s.setTransform(m);
+    }
+
 }
