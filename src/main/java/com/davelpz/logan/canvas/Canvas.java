@@ -85,7 +85,9 @@ public class Canvas {
                 int line_width = 0;
                 for (int i = 0; i < width; i++) {
                     Color col = pixelAt(i, j);
-                    col.mul(255.0);
+                    col.setRed(col.red() * 255.0);
+                    col.setGreen(col.green() * 255.0);
+                    col.setBlue(col.blue() * 255.0);
                     col.clamp(0.0, 255.0);
                     int ir = (int) (col.red() + 0.5);
                     int ig = (int) (col.green() + 0.5);
