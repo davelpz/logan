@@ -1,5 +1,6 @@
 package com.davelpz.logan.shapes;
 
+import com.davelpz.logan.material.Material;
 import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.tuple.Tuple;
 
@@ -9,6 +10,7 @@ public class Sphere {
     public Tuple center;
     public double radius;
     public Matrix transform = Matrix.identity4;
+    public Material material = new Material();
 
     public Sphere() {
         this.center = Tuple.point(0,0,0);
@@ -42,6 +44,14 @@ public class Sphere {
 
     public void setTransform(Matrix transform) {
         this.transform = transform;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public Tuple normalAt(Tuple world_point) {

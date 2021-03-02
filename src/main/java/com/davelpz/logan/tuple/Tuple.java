@@ -107,11 +107,11 @@ public class Tuple {
     }
 
     public Tuple add(Tuple b) {
-        return add(this,b);
+        return add(this, b);
     }
 
     public Tuple subtract(Tuple b) {
-        return subtract(this,b);
+        return subtract(this, b);
     }
 
     public Tuple negate() {
@@ -119,11 +119,11 @@ public class Tuple {
     }
 
     public Tuple mul(double b) {
-        return mul(this,b);
+        return mul(this, b);
     }
 
     public Tuple div(double b) {
-        return div(this,b);
+        return div(this, b);
     }
 
     public double magnitude() {
@@ -137,6 +137,10 @@ public class Tuple {
                 w() / magnitude());
     }
 
+    public Tuple reflect(Tuple normal) {
+        return this.subtract(normal.mul(2 * dot(this, normal)));
+    }
+
     public boolean equals(Tuple b) {
         return equals(b, EPSILON);
     }
@@ -146,7 +150,8 @@ public class Tuple {
                 < delta);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "Tuple{" + "values=" + Arrays.toString(values) + '}';
     }
 }

@@ -70,31 +70,19 @@ public class Color {
     }
 
     public Color add(Color b) {
-        values[0] += b.red();
-        values[1] += b.green();
-        values[2] += b.blue();
-        return this;
+        return add(this,b);
     }
 
     public Color subtract(Color b) {
-        values[0] -= b.red();
-        values[1] -= b.green();
-        values[2] -= b.blue();
-        return this;
+        return subtract(this,b);
     }
 
     public Color mul(double b) {
-        setRed(red() * b);
-        setGreen(green() * b);
-        setBlue(blue() * b);
-        return this;
+        return mul(this,b);
     }
 
     public Color mul(Color b) {
-        setRed(red() * b.red());
-        setGreen(green() * b.green());
-        setBlue(blue() * b.blue());
-        return this;
+        return mul(this,b);
     }
 
     public void clamp(double min, double max) {

@@ -1,5 +1,6 @@
 package com.davelpz.logan.matrix;
 
+import com.davelpz.logan.material.Material;
 import com.davelpz.logan.ray.Intersection;
 import com.davelpz.logan.ray.Ray;
 import com.davelpz.logan.shapes.Sphere;
@@ -7,6 +8,7 @@ import com.davelpz.logan.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.it.Ma;
 import io.cucumber.java.sl.In;
 
 import java.util.List;
@@ -817,5 +819,37 @@ public class StepDefinitions {
     public void set_transform_s_m() {
         s.setTransform(m);
     }
+
+    Material mat;
+    @When("mat ← s.material")
+    public void mat_s_material() {
+        mat = s.getMaterial();
+    }
+
+    @Then("mat = material")
+    public void mat_material() {
+        assertTrue(mat.equals(new Material()));
+    }
+
+    @Given("mat ← material")
+    public void mat_material2() {
+        mat = new Material();
+    }
+
+    @Given("mat.ambient ← {int}")
+    public void mat_ambient(Integer int1) {
+        mat.setAmbient(int1);
+    }
+
+    @When("s.material ← mat")
+    public void s_material_mat() {
+        s.setMaterial(mat);
+    }
+
+    @Then("s.material = mat")
+    public void s_material_mat2() {
+        assertTrue(s.getMaterial().equals(mat));
+    }
+
 
 }

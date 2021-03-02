@@ -1,7 +1,8 @@
 package com.davelpz.logan.tuple;
 
 import com.davelpz.logan.color.Color;
-import com.davelpz.logan.tuple.Tuple;
+import com.davelpz.logan.light.PointLight;
+import com.davelpz.logan.material.Material;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -276,26 +277,112 @@ public class StepDefinitions {
         assertTrue(c1.mul(c2).equals(new Color(double1, double2, double3)));
     }
 
-    @Given("n ← vector\\({int}, {int}, {int})")
-    public void n_vector(Integer int1, Integer int2, Integer int3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    Tuple n;
+    @Given("n ← vector\\({double}, {double}, {double})")
+    public void n_vector(Double int1, Double int2, Double int3) {
+        n = Tuple.vector(int1,int2,int3);
     }
 
+    Tuple r;
     @When("r ← reflect\\(v, n)")
     public void r_reflect_v_n() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        r = v.reflect(n);
     }
 
     @Then("r = vector\\({int}, {int}, {int})")
     public void r_vector(Integer int1, Integer int2, Integer int3) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertTrue(r.equals(Tuple.vector(int1,int2,int3)));
     }
 
     public void n_vector(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
+
+    Color intensity;
+    Tuple position;
+    @Given("intensity ← color\\({int}, {int}, {int})")
+    public void intensity_color(Integer int1, Integer int2, Integer int3) {
+        intensity = new Color(int1,int2,int3);
+    }
+
+    @Given("position ← point\\({int}, {int}, {int})")
+    public void position_point(Integer int1, Integer int2, Integer int3) {
+        position = Tuple.point(int1,int2,int3);
+    }
+
+    PointLight light;
+    @When("light ← point_light\\(position, intensity)")
+    public void light_point_light_position_intensity() {
+        light = new PointLight(intensity,position);
+    }
+
+    @Then("light.position = position")
+    public void light_position_position() {
+        assertTrue(light.getPosition().equals(position));
+    }
+
+    @Then("light.intensity = intensity")
+    public void light_intensity_intensity() {
+        assertTrue(light.getIntensity().equals(intensity));
+    }
+
+    Material m;
+    @Given("m ← material")
+    public void m_material() {
+        m = new Material();
+    }
+
+    @Then("m.color = color\\({int}, {int}, {int})")
+    public void m_color_color(Integer int1, Integer int2, Integer int3) {
+        assertTrue(m.getColor().equals(new Color(int1,int2,int3)));
+    }
+
+    @Then("m.ambient = {double}")
+    public void m_ambient(Double double1) {
+        assertEquals(m.getAmbient(),double1,0.00001);
+    }
+
+    @Then("m.diffuse = {double}")
+    public void m_diffuse(Double double1) {
+        assertEquals(m.getDiffuse(),double1,0.00001);
+    }
+
+    @Then("m.specular = {double}")
+    public void m_specular(Double double1) {
+        assertEquals(m.getSpecular(),double1,0.00001);
+    }
+
+    @Then("m.shininess = {double}")
+    public void m_shininess(Double double1) {
+        assertEquals(m.getShininess(),double1,0.00001);
+    }
+
+    Tuple eyev,normalv;
+    @Given("eyev ← vector\\({double}, {double}, {double})")
+    public void eyev_vector(Double int1, Double int2, Double int3) {
+        eyev = Tuple.vector(int1,int2,int3);
+    }
+
+    @Given("normalv ← vector\\({int}, {int}, {int})")
+    public void normalv_vector(Integer int1, Integer int2, Integer int3) {
+        normalv = Tuple.vector(int1,int2,int3);
+    }
+
+    @Given("light ← point_light\\(point-{int}-{int}-{int}, color-{int}-{int}-{int})")
+    public void light_point_light_point_color(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5, Integer int6) {
+        light = new PointLight(new Color(int4,int5,int6), Tuple.point(int1,int2,int3));
+    }
+
+    Color result;
+    @When("result ← lighting\\(m, light, position, eyev, normalv)")
+    public void result_lighting_m_light_position_eyev_normalv() {
+        result = Material.lighting(m,light,position,eyev,normalv);
+    }
+
+    @Then("result = color\\({double}, {double}, {double})")
+    public void result_color(Double double1, Double double2, Double double3) {
+        assertTrue(result.equals(new Color(double1,double2,double3)));
+    }
+
 }
