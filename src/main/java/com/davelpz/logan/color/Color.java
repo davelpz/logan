@@ -28,18 +28,23 @@ public class Color {
     }
 
     public static Color mul(Color a, Color b) {
-        return new Color(a.red() * b.red(), a.green() * b.green(),
-                a.blue() * b.blue());
+        return new Color(a.red() * b.red(), a.green() * b.green(), a.blue() * b.blue());
     }
 
     public static Color mul(Color a, double b) {
-        return new Color(a.red() * b, a.green() * b,
-                a.blue() * b);
+        return new Color(a.red() * b, a.green() * b, a.blue() * b);
     }
 
     public static Color mul(double b, Color a) {
-        return new Color(a.red() * b, a.green() * b,
-                a.blue() * b);
+        return new Color(a.red() * b, a.green() * b, a.blue() * b);
+    }
+
+    public static double clamp(double value, double min, double max) {
+        if (value < min)
+            value = min;
+        else if (value > max)
+            value = max;
+        return value;
     }
 
     public double red() {
@@ -70,19 +75,19 @@ public class Color {
     }
 
     public Color add(Color b) {
-        return add(this,b);
+        return add(this, b);
     }
 
     public Color subtract(Color b) {
-        return subtract(this,b);
+        return subtract(this, b);
     }
 
     public Color mul(double b) {
-        return mul(this,b);
+        return mul(this, b);
     }
 
     public Color mul(Color b) {
-        return mul(this,b);
+        return mul(this, b);
     }
 
     public void clamp(double min, double max) {

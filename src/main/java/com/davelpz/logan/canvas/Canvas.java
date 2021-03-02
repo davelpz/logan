@@ -85,13 +85,12 @@ public class Canvas {
                 int line_width = 0;
                 for (int i = 0; i < width; i++) {
                     Color col = pixelAt(i, j);
-                    col.setRed(col.red() * 255.0);
-                    col.setGreen(col.green() * 255.0);
-                    col.setBlue(col.blue() * 255.0);
-                    col.clamp(0.0, 255.0);
-                    int ir = (int) (col.red() + 0.5);
-                    int ig = (int) (col.green() + 0.5);
-                    int ib = (int) (col.blue() + 0.5);
+                    double r = Color.clamp(col.red() * 255.0,0.0, 255.0);
+                    double g = Color.clamp(col.green() * 255.0,0.0, 255.0);
+                    double b = Color.clamp(col.blue() * 255.0,0.0, 255.0);
+                    int ir = (int) (r + 0.5);
+                    int ig = (int) (g + 0.5);
+                    int ib = (int) (b + 0.5);
                     String str_ir = String.valueOf(ir);
                     String str_ig = String.valueOf(ig);
                     String str_ib = String.valueOf(ib);
