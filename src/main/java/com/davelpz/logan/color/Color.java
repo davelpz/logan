@@ -74,6 +74,12 @@ public class Color {
         return this;
     }
 
+    public void set(double r, double g, double b) {
+        values[0] = r;
+        values[1] = g;
+        values[2] = b;
+    }
+
     public Color add(Color b) {
         return add(this, b);
     }
