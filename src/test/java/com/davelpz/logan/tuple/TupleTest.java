@@ -32,7 +32,7 @@ public class TupleTest {
     public void add() {
         Tuple a = new Tuple(0, 1, 2, 3);
         Tuple b = new Tuple(1, 1, 1, 1);
-        Tuple c = a.add(b);
+        a = a.add(b);
         assertEquals(1.0, a.x(), Tuple.EPSILON);
         assertEquals(2.0, a.y(), Tuple.EPSILON);
         assertEquals(3.0, a.z(), Tuple.EPSILON);
@@ -43,7 +43,7 @@ public class TupleTest {
     public void sub() {
         Tuple a = new Tuple(0, 1, 2, 3);
         Tuple b = new Tuple(1, 1, 1, 1);
-        Tuple c = a.subtract(b);
+        a = a.subtract(b);
         assertEquals(-1.0, a.x(), Tuple.EPSILON);
         assertEquals(0.0, a.y(), Tuple.EPSILON);
         assertEquals(1.0, a.z(), Tuple.EPSILON);
@@ -63,7 +63,7 @@ public class TupleTest {
     @Test
     public void mul() {
         Tuple a = new Tuple(4, 1, 2, 3);
-        Tuple b = a.mul(2.0);
+        a = a.mul(2.0);
         assertEquals(8.0, a.x(), Tuple.EPSILON);
         assertEquals(2.0, a.y(), Tuple.EPSILON);
         assertEquals(4.0, a.z(), Tuple.EPSILON);
@@ -73,7 +73,7 @@ public class TupleTest {
     @Test
     public void div() {
         Tuple a = new Tuple(4, 1, 2, 8);
-        Tuple b = a.div(2);
+        a = a.div(2);
         assertEquals(2.0, a.x(), Tuple.EPSILON);
         assertEquals(0.5, a.y(), Tuple.EPSILON);
         assertEquals(1.0, a.z(), Tuple.EPSILON);

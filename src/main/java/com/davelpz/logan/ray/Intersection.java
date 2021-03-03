@@ -1,6 +1,7 @@
 package com.davelpz.logan.ray;
 
 import com.davelpz.logan.shapes.Sphere;
+import com.davelpz.logan.tuple.Tuple;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -28,6 +29,28 @@ public class Intersection {
         }
 
         return Optional.ofNullable(found);
+    }
+
+    public Computation prepare_computations(Ray r) {
+        Computation comps = new Computation();
+
+        // copy the intersections properties, for convenience
+        comps.t = this.t;
+        comps.object = this.object;
+
+        // precompute some useful values
+        comps.point = r.position(comps.t);
+        comps.eyev = r.direction.negate();
+        comps.normalv = comps.object.normalAt(comps.point);
+
+        if (Tuple.dot(comps.normalv,comps.eyev) < 0) {
+            comps.inside = true;
+            comps.normalv = comps.normalv.negate();
+        } else {
+            comps.inside = false;
+        }
+
+        return comps;
     }
 
     @Override
