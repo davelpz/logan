@@ -93,4 +93,59 @@ public class WorldTest {
         Color c = w.color_at(r);
         assertTrue(c.equals(inner.material.getColor()));
     }
+
+    @Test
+    public void view_transform() {
+        Tuple from = Tuple.point(0,0,0);
+        Tuple to = Tuple.point(0,0,-1);
+        Tuple up = Tuple.vector(0,1,0);
+        Matrix t = World.view_transform(from,to,up);
+        assertTrue(t.equals(Matrix.identity4));
+    }
+
+    @Test
+    public void view_transform2() {
+        Tuple from = Tuple.point(0,0,0);
+        Tuple to = Tuple.point(0,0,1);
+        Tuple up = Tuple.vector(0,1,0);
+        Matrix t = World.view_transform(from,to,up);
+        assertTrue(t.equals(Matrix.scaling(-1,1,-1)));
+    }
+
+    @Test
+    public void view_transform3() {
+        Tuple from = Tuple.point(0,0,8);
+        Tuple to = Tuple.point(0,0,0);
+        Tuple up = Tuple.vector(0,1,0);
+        Matrix t = World.view_transform(from,to,up);
+        assertTrue(t.equals(Matrix.translation(0,0,-8)));
+    }
+
+    @Test
+    public void view_transform4() {
+        Tuple from = Tuple.point(1,3,2);
+        Tuple to = Tuple.point(4,-2,8);
+        Tuple up = Tuple.vector(1,1,0);
+        Matrix t = World.view_transform(from,to,up);
+        Matrix expected = new Matrix(4);
+        expected.set(0,0, -0.50709);
+        expected.set(0,1, 0.50709);
+        expected.set(0,2, 0.67612);
+        expected.set(0,3, -2.36643);
+        expected.set(1,0, 0.76772);
+        expected.set(1,1, 0.60609);
+        expected.set(1,2, 0.12122);
+        expected.set(1,3, -2.82843);
+        expected.set(2,0, -0.35857);
+        expected.set(2,1, 0.59761);
+        expected.set(2,2, -0.71714);
+        expected.set(2,3, 0.00000);
+        expected.set(3,0, 0.00000);
+        expected.set(3,1, 0.00000);
+        expected.set(3,2, 0.00000);
+        expected.set(3,3, 1.00000);
+
+        assertTrue(t.equals(expected));
+    }
+
 }

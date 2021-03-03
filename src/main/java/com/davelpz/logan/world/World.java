@@ -84,6 +84,31 @@ public class World implements Comparator<Intersection>{
         }
     }
 
+    public static Matrix view_transform(Tuple from, Tuple to, Tuple up) {
+        Tuple forward = to.subtract(from).normalize();
+        Tuple left = Tuple.cross(forward,up.normalize());
+        Tuple true_up = Tuple.cross(left,forward);
+        Matrix orientation = new Matrix(4);
+        orientation.set(0,0, left.x());
+        orientation.set(0,1, left.y());
+        orientation.set(0,2, left.z());
+        orientation.set(0,3, 0);
+        orientation.set(1,0, true_up.x());
+        orientation.set(1,1, true_up.y());
+        orientation.set(1,2, true_up.z());
+        orientation.set(1,3, 0);
+        orientation.set(2,0, -forward.x());
+        orientation.set(2,1, -forward.y());
+        orientation.set(2,2, -forward.z());
+        orientation.set(2,3, 0);
+        orientation.set(3,0, 0);
+        orientation.set(3,1, 0);
+        orientation.set(3,2, 0);
+        orientation.set(3,3, 1);
+
+        return orientation.multiply(Matrix.translation(-from.x(),-from.y(),-from.z()));
+    }
+
     @Override
     public int compare(Intersection o1, Intersection o2) {
         return Double.compare(o1.t, o2.t);
