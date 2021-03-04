@@ -148,4 +148,33 @@ public class WorldTest {
         assertTrue(t.equals(expected));
     }
 
+    @Test
+    public void test1() {
+        World w = World.defaultWorld();
+        Tuple p = Tuple.point(0,10,0);
+        assertFalse(w.is_shadowed(p));
+    }
+
+    @Test
+    public void test2() {
+        World w = World.defaultWorld();
+        Tuple p = Tuple.point(10,-10,10);
+        assertTrue(w.is_shadowed(p));
+    }
+
+    @Test
+    public void test3() {
+        World w = World.defaultWorld();
+        Tuple p = Tuple.point(-20,20,-20);
+        assertFalse(w.is_shadowed(p));
+    }
+
+    @Test
+    public void test4() {
+        World w = World.defaultWorld();
+        Tuple p = Tuple.point(-2,2,-2);
+        assertFalse(w.is_shadowed(p));
+    }
+
+
 }

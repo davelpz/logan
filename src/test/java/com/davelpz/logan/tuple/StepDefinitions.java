@@ -385,4 +385,15 @@ public class StepDefinitions {
         assertTrue(result.equals(new Color(double1,double2,double3)));
     }
 
+    boolean in_shadow;
+    @Given("in_shadow ← true")
+    public void in_shadow_true() {
+        in_shadow = true;
+    }
+
+    @When("result ← lighting\\(m, light, position, eyev, normalv, in_shadow)")
+    public void result_lighting_m_light_position_eyev_normalv_in_shadow() {
+        result = Material.lighting(m,light,position,eyev,normalv,in_shadow);
+    }
+
 }

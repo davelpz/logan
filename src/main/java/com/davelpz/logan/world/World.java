@@ -109,6 +109,16 @@ public class World implements Comparator<Intersection>{
         return orientation.multiply(Matrix.translation(-from.x(),-from.y(),-from.z()));
     }
 
+    public boolean is_shadowed(Tuple point) {
+        Tuple v = lights.get(0).getPosition().subtract(point);
+        double distance = v.magnitude();
+        Tuple direction = v.normalize();
+        Ray r = new Ray(point,direction);
+        Intersection[] xs = intersect_world(r);
+        Optional<Intersection> hit = Intersection.hit(xs);
+        return hit.isPresent() && hit.get().t < distance;
+    }
+
     @Override
     public int compare(Intersection o1, Intersection o2) {
         return Double.compare(o1.t, o2.t);
