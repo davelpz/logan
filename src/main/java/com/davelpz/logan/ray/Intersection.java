@@ -50,6 +50,10 @@ public class Intersection {
             comps.inside = false;
         }
 
+        // after computing and (if appropriate) negating
+        // the normal vector...
+        comps.over_point = comps.point.add(comps.normalv.mul(Tuple.EPSILON));
+
         return comps;
     }
 

@@ -176,5 +176,21 @@ public class WorldTest {
         assertFalse(w.is_shadowed(p));
     }
 
+    @Test
+    public void test5() {
+        World w = new World();
+        w.getLights().add(new PointLight(new Color(1,1,1), Tuple.point(0,0,-10)));
+        Sphere s1 = new Sphere();
+        w.getObjects().add(s1);
 
+        Sphere s2 = new Sphere();
+        s2.setTransform(Matrix.translation(0,0,10));
+        w.getObjects().add(s2);
+
+        Ray r = new Ray(Tuple.point(0,0,5),Tuple.vector(0,0,1));
+        Intersection i = new Intersection(4,s2);
+        Computation comps = i.prepare_computations(r);
+        Color c = w.shade_hit(comps);
+        assertTrue(c.equals(new Color(0.1,0.1,0.1)));
+    }
 }

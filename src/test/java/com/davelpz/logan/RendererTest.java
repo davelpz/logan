@@ -51,28 +51,31 @@ public class RendererTest {
                 .multiply(Matrix.scaling(10,0.01,10)));
         right_wall.setMaterial(floor.getMaterial());
 
+        double specular = 0.3;
+        double diffuse = 0.7;
+
         Sphere middle = new Sphere();
         middle.setTransform(Matrix.translation(-0.5,1,0.5));
         middle.setMaterial(new Material());
         middle.getMaterial().setColor(new Color(0.1,1,0.5));
-        middle.getMaterial().setDiffuse(0.7);
-        middle.getMaterial().setSpecular(0.3);
+        middle.getMaterial().setDiffuse(diffuse);
+        middle.getMaterial().setSpecular(specular);
 
         Sphere right = new Sphere();
         right.setTransform(Matrix.translation(1.5,0.5,-0.5)
                 .multiply(Matrix.scaling(0.5,0.5,0.5)));
         right.setMaterial(new Material());
         right.getMaterial().setColor(new Color(0.5,1,0.1));
-        right.getMaterial().setDiffuse(0.7);
-        right.getMaterial().setSpecular(0.3);
+        right.getMaterial().setDiffuse(diffuse);
+        right.getMaterial().setSpecular(specular);
 
         Sphere left = new Sphere();
         left.setTransform(Matrix.translation(-1.5,0.33,-0.75)
                 .multiply(Matrix.scaling(0.33,0.33,0.33)));
         left.setMaterial(new Material());
         left.getMaterial().setColor(new Color(1,0.8,0.1));
-        left.getMaterial().setDiffuse(0.7);
-        left.getMaterial().setSpecular(0.3);
+        left.getMaterial().setDiffuse(diffuse);
+        left.getMaterial().setSpecular(specular);
 
         World world = new World();
         world.getLights().add(new PointLight(new Color(1,1,1), Tuple.point(-10,10,-10)));
