@@ -5,7 +5,6 @@ import com.davelpz.logan.canvas.Canvas;
 import com.davelpz.logan.color.Color;
 import com.davelpz.logan.light.PointLight;
 import com.davelpz.logan.material.Material;
-import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.ray.Intersection;
 import com.davelpz.logan.ray.Ray;
 import com.davelpz.logan.shapes.Sphere;
