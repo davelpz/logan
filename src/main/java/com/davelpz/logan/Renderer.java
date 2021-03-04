@@ -10,6 +10,7 @@ import com.davelpz.logan.ray.Ray;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
 import com.davelpz.logan.util.PixelStream;
+import com.davelpz.logan.util.Ticker;
 import com.davelpz.logan.world.World;
 
 import java.io.IOException;
@@ -19,11 +20,16 @@ public class Renderer {
 
     public static Canvas render(Camera camera, World world) {
         Canvas image = new Canvas(camera.getHsize(), camera.getVsize());
+        Ticker ticker = new Ticker(camera.getHsize()*camera.getVsize(), 1);
+
         PixelStream.genStream(camera.getHsize(),camera.getVsize()).parallel().forEach(p -> {
             Ray ray = camera.rayForPixel(p.x,p.y);
             Color color = world.color_at(ray);
             image.writePixel(color,p.x,p.y);
+            ticker.tick();
         });
+
+        ticker.end();
         return image;
     }
 

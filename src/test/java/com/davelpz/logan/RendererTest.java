@@ -84,7 +84,7 @@ public class RendererTest {
         world.getObjects().add(right);
         world.getObjects().add(left);
 
-        Camera c = new Camera(800,400,Math.PI/3.0);
+        Camera c = new Camera(100,50,Math.PI/3.0);
         c.setTransform(World.view_transform(Tuple.point(0,1.5,-5),
                 Tuple.point(0,1,0),
                 Tuple.vector(0,1,0)));
