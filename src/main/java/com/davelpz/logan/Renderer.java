@@ -1,5 +1,6 @@
 package com.davelpz.logan;
 
+import com.davelpz.logan.camera.Camera;
 import com.davelpz.logan.canvas.Canvas;
 import com.davelpz.logan.color.Color;
 import com.davelpz.logan.light.PointLight;
@@ -10,13 +11,24 @@ import com.davelpz.logan.ray.Ray;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
 import com.davelpz.logan.util.PixelStream;
+import com.davelpz.logan.world.World;
 
 import java.io.IOException;
 import java.util.Optional;
 
 public class Renderer {
 
-    public void render() throws IOException {
+    public static Canvas render(Camera camera, World world) {
+        Canvas image = new Canvas(camera.getHsize(), camera.getVsize());
+        PixelStream.genStream(camera.getHsize(),camera.getVsize()).parallel().forEach(p -> {
+            Ray ray = camera.rayForPixel(p.x,p.y);
+            Color color = world.color_at(ray);
+            image.writePixel(color,p.x,p.y);
+        });
+        return image;
+    }
+
+    public void renderOld() throws IOException {
         Tuple ray_origin = Tuple.point(0, 0, -5);
         double wall_z = 10;
         double wall_size = 7.0;
