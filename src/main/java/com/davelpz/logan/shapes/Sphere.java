@@ -6,11 +6,9 @@ import com.davelpz.logan.tuple.Tuple;
 
 import java.util.Objects;
 
-public class Sphere {
+public class Sphere extends Shape {
     public Tuple center;
     public double radius;
-    public Matrix transform = Matrix.identity4;
-    public Material material = new Material();
 
     public Sphere() {
         this.center = Tuple.point(0,0,0);
@@ -36,22 +34,6 @@ public class Sphere {
 
     public void setRadius(double radius) {
         this.radius = radius;
-    }
-
-    public Matrix getTransform() {
-        return transform;
-    }
-
-    public void setTransform(Matrix transform) {
-        this.transform = transform;
-    }
-
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
     }
 
     public Tuple normalAt(Tuple world_point) {
