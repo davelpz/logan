@@ -37,7 +37,7 @@ public class Material {
         // light_dot_normal represents the cosine of the angle between
         // the light vector and the normal vector. A negative number
         // means the light is on the other side of the surface.
-        double light_dot_normal = Tuple.dot(lightv, normalv);
+        double light_dot_normal = lightv.dot(normalv);
 
         Color diffuse;
         Color specular;
@@ -52,7 +52,7 @@ public class Material {
             // the reflection vector and the eye vector. A negative number
             // means the light reflects away from the eye.
             Tuple reflectv = lightv.negate().reflect(normalv);
-            double reflect_dot_eye = Tuple.dot(reflectv, eyev);
+            double reflect_dot_eye = reflectv.dot(eyev);
             if (reflect_dot_eye <= 0) {
                 specular = new Color(0, 0, 0);
             } else {

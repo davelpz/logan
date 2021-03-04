@@ -43,7 +43,7 @@ public class Intersection {
         comps.eyev = r.direction.negate();
         comps.normalv = comps.object.normalAt(comps.point);
 
-        if (Tuple.dot(comps.normalv,comps.eyev) < 0) {
+        if (comps.normalv.dot(comps.eyev) < 0) {
             comps.inside = true;
             comps.normalv = comps.normalv.negate();
         } else {

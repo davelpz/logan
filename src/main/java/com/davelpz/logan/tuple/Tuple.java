@@ -22,19 +22,19 @@ public class Tuple {
         return new Tuple(x, y, z, 0.0);
     }
 
-    public static Tuple add(Tuple a, Tuple b) {
+    private static Tuple add(Tuple a, Tuple b) {
         return new Tuple(a.x() + b.x(), a.y() + b.y(), a.z() + b.z(), a.w() + b.w());
     }
 
-    public static Tuple subtract(Tuple a, Tuple b) {
+    private static Tuple subtract(Tuple a, Tuple b) {
         return new Tuple(a.x() - b.x(), a.y() - b.y(), a.z() - b.z(), a.w() - b.w());
     }
 
-    public static Tuple negate(Tuple a) {
+    private static Tuple negate(Tuple a) {
         return new Tuple(-a.x(), -a.y(), -a.z(), -a.w());
     }
 
-    public static Tuple mul(Tuple a, double b) {
+    private static Tuple mul(Tuple a, double b) {
         return new Tuple(a.x() * b, a.y() * b,
                 a.z() * b, a.w() * b);
     }
@@ -44,19 +44,19 @@ public class Tuple {
                 a.z() * b, a.w() * b);
     }
 
-    public static Tuple div(Tuple a, double b) {
+    private static Tuple div(Tuple a, double b) {
         return new Tuple(a.x() / b, a.y() / b,
                 a.z() / b, a.w() / b);
     }
 
-    public static double dot(Tuple a, Tuple b) {
+    private static double dot(Tuple a, Tuple b) {
         return a.x() * b.x()
                 + a.y() * b.y()
                 + a.z() * b.z()
                 + a.w() * b.w();
     }
 
-    public static Tuple cross(Tuple a, Tuple b) {
+    private static Tuple cross(Tuple a, Tuple b) {
         return Tuple.vector(a.y() * b.z() - a.z() * b.y(),
                 a.z() * b.x() - a.x() * b.z(),
                 a.x() * b.y() - a.y() * b.x());
@@ -124,6 +124,14 @@ public class Tuple {
 
     public Tuple div(double b) {
         return div(this, b);
+    }
+
+    public double dot(Tuple b) {
+        return dot(this,b);
+    }
+
+    public Tuple cross(Tuple b) {
+        return cross(this,b);
     }
 
     public double magnitude() {

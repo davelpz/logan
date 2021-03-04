@@ -22,7 +22,7 @@ public class Matrix {
         this.data = data;
     }
 
-    public static Matrix multiply(Matrix a, Matrix b) {
+    private static Matrix multiply(Matrix a, Matrix b) {
         Matrix m = new Matrix(b.dimension);
         double[][] dataA = a.data;
         double[][] dataB = b.data;
@@ -37,7 +37,7 @@ public class Matrix {
         return m;
     }
 
-    public static Tuple multiply(Matrix a, Tuple b) {
+    private static Tuple multiply(Matrix a, Tuple b) {
         Tuple t = new Tuple(0, 0, 0, 0);
         double[][] dataA = a.data;
 
@@ -49,7 +49,7 @@ public class Matrix {
         return t;
     }
 
-    public static Matrix transpose(Matrix a) {
+    private static Matrix transpose(Matrix a) {
         Matrix m = new Matrix(a.dimension);
 
         for (int row = 0; row < a.dimension; row++) {

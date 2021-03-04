@@ -87,8 +87,8 @@ public class World implements Comparator<Intersection>{
 
     public static Matrix view_transform(Tuple from, Tuple to, Tuple up) {
         Tuple forward = to.subtract(from).normalize();
-        Tuple left = Tuple.cross(forward,up.normalize());
-        Tuple true_up = Tuple.cross(left,forward);
+        Tuple left = forward.cross(up.normalize());
+        Tuple true_up = left.cross(forward);
         Matrix orientation = new Matrix(4);
         orientation.set(0,0, left.x());
         orientation.set(0,1, left.y());

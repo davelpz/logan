@@ -15,8 +15,8 @@ public class Ray {
         this.direction = direction;
     }
 
-    public static Tuple position(Ray r, double t) {
-        return Tuple.add(r.origin, Tuple.mul(r.direction, t));
+    private static Tuple position(Ray r, double t) {
+        return r.origin.add(r.direction.mul(t));
     }
 
     public Ray transform(Matrix m) {
@@ -25,10 +25,10 @@ public class Ray {
 
     public Intersection[] intersects(Sphere s) {
         Ray r = this.transform(s.transform.inverse());
-        Tuple sphere_to_ray = Tuple.subtract(r.origin, Tuple.point(0, 0, 0));
-        double a = Tuple.dot(r.direction, r.direction);
-        double b = 2 * Tuple.dot(r.direction, sphere_to_ray);
-        double c = Tuple.dot(sphere_to_ray, sphere_to_ray) - 1;
+        Tuple sphere_to_ray = r.origin.subtract(Tuple.point(0, 0, 0));
+        double a = r.direction.dot(r.direction);
+        double b = 2 * r.direction.dot(sphere_to_ray);
+        double c = sphere_to_ray.dot(sphere_to_ray) - 1;
         double discriminant = (b * b) - 4 * a * c;
 
         if (discriminant < 0) {

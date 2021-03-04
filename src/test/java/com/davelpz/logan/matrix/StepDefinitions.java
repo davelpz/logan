@@ -151,7 +151,7 @@ public class StepDefinitions {
         Matrix expectedResult = new Matrix(4);
         expectedResult.setData(data);
 
-        Matrix result = Matrix.multiply(a,b);
+        Matrix result = a.multiply(b);
 
         assertTrue(result.equals(expectedResult));
     }
@@ -166,19 +166,19 @@ public class StepDefinitions {
     @Then("A mul tb = tuple\\({int}, {int}, {int}, {int})")
     public void a_mul_tb_tuple(Integer int1, Integer int2, Integer int3, Integer int4) {
         Tuple t = new Tuple(int1,int2,int3,int4);
-        Tuple result = Matrix.multiply(a,tb);
+        Tuple result = a.multiply(tb);
         assertTrue(t.equals(result));
     }
 
     @Then("A mul identity_matrix = A")
     public void a_mul_identity_matrix_a() {
-        Matrix result = Matrix.multiply(a,Matrix.identity4);
+        Matrix result = a.multiply(Matrix.identity4);
         assertTrue(result.equals(a));
     }
 
     @Then("identity_matrix mul tb = tb")
     public void identity_matrix_mul_tb_tb() {
-        Tuple result = Matrix.multiply(Matrix.identity4,tb);
+        Tuple result = Matrix.identity4.multiply(tb);
         assertTrue(tb.equals(result));
     }
 
@@ -194,12 +194,12 @@ public class StepDefinitions {
         List<List<Double>> data = dataTable.asLists(Double.TYPE);
         Matrix expectedResult = new Matrix(4);
         expectedResult.setData(data);
-        assertTrue(Matrix.transpose(a).equals(expectedResult));
+        assertTrue(a.transpose().equals(expectedResult));
     }
 
     @Given("A ← transpose\\(identity_matrix)")
     public void a_transpose_identity_matrix() {
-        a = Matrix.transpose(Matrix.identity4);
+        a = Matrix.identity4.transpose();
     }
 
     @Then("A = identity_matrix")
@@ -401,7 +401,7 @@ public class StepDefinitions {
 
     @Then("mtransform * mp = point\\({int}, {int}, {int})")
     public void mtransform_mp_point(Integer int1, Integer int2, Integer int3) {
-        Tuple mul = Matrix.multiply(mtransform,mp);
+        Tuple mul = mtransform.multiply(mp);
         assertTrue(mul.equals(Tuple.point(int1,int2,int3)));
     }
 
@@ -413,7 +413,7 @@ public class StepDefinitions {
 
     @Then("inv * mp = point\\({int}, {int}, {int})")
     public void inv_mp_point(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Matrix.multiply(inv,mp).equals(Tuple.point(int1,int2,int3)));
+        assertTrue(inv.multiply(mp).equals(Tuple.point(int1,int2,int3)));
     }
 
     Tuple mv;
@@ -424,7 +424,7 @@ public class StepDefinitions {
 
     @Then("mtransform * mv = mv")
     public void mtransform_mv_mv() {
-        assertTrue(Matrix.multiply(mtransform,mv).equals(mv));
+        assertTrue(mtransform.multiply(mv).equals(mv));
     }
 
     @Given("mtransform ← scaling\\({int}, {int}, {int})")
@@ -434,17 +434,17 @@ public class StepDefinitions {
 
     @Then("mtransform mul mp = point\\({int}, {int}, {int})")
     public void mtransform_mul_mp_point(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Matrix.multiply(mtransform,mp).equals(Tuple.point(int1,int2,int3)));
+        assertTrue(mtransform.multiply(mp).equals(Tuple.point(int1,int2,int3)));
     }
 
     @Then("mtransform * mv = vector\\({int}, {int}, {int})")
     public void mtransform_mv_vector(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Matrix.multiply(mtransform,mv).equals(Tuple.vector(int1,int2,int3)));
+        assertTrue(mtransform.multiply(mv).equals(Tuple.vector(int1,int2,int3)));
     }
 
     @Then("inv * mv = vector\\({int}, {int}, {int})")
     public void inv_mv_vector(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Matrix.multiply(inv,mv).equals(Tuple.vector(int1,int2,int3)));
+        assertTrue(inv.multiply(mv).equals(Tuple.vector(int1,int2,int3)));
     }
 
     Matrix half_quarter;
@@ -462,7 +462,7 @@ public class StepDefinitions {
     @Then("half_quarter * mp = point\\({int}, {double}, {double})")
     public void half_quarter_mp_point(Integer int1, Double double1, Double double2) {
         Tuple tp = Tuple.point(int1, double1, double2);
-        assertTrue(Matrix.multiply(half_quarter,mp).equals(tp));
+        assertTrue(half_quarter.multiply(mp).equals(tp));
     }
 
     @Given("inv ← inverse\\(half_quarter)")
@@ -473,7 +473,7 @@ public class StepDefinitions {
     @Then("inv mul mp = point\\({double}, {double}, {double})")
     public void inv_mul_mp_point(Double double1, Double double2, Double double3) {
         Tuple tp = Tuple.point(double1, double2, double3);
-        Tuple tmp = Matrix.multiply(inv,mp);
+        Tuple tmp = inv.multiply(mp);
         assertTrue(tmp.equals(tp));
     }
 
@@ -490,14 +490,14 @@ public class StepDefinitions {
     @Then("half_quarter mul mp = point\\({double}, {double}, {double})")
     public void half_quarter_mul_mp_point(Double double1, Double double2, Double double3) {
         Tuple tp = Tuple.point(double1, double2, double3);
-        Tuple tmp = Matrix.multiply(half_quarter,mp);
+        Tuple tmp = half_quarter.multiply(mp);
         assertTrue(tmp.equals(tp));
     }
 
     @Then("full_quarter mul mp = point\\({double}, {double}, {double})")
     public void full_quarter_mul_mp_point(Double double1, Double double2, Double double3) {
         Tuple tp = Tuple.point(double1, double2, double3);
-        Tuple tmp = Matrix.multiply(full_quarter,mp);
+        Tuple tmp = full_quarter.multiply(mp);
         assertTrue(tmp.equals(tp));
     }
 
@@ -534,7 +534,7 @@ public class StepDefinitions {
     Tuple p2,p3,p4;
     @When("p2 ← A * mp")
     public void p2_a_mp() {
-        p2 = Matrix.multiply(a,mp);
+        p2 = a.multiply(mp);
         p2 = a.multiply(mp);
     }
 
@@ -572,7 +572,7 @@ public class StepDefinitions {
     @Then("T * mp = point\\({int}, {int}, {int})")
     public void t_mp_point(Integer int1, Integer int2, Integer int3) {
         Tuple tp = Tuple.point(int1,int2,int3);
-        Tuple tmp = Matrix.multiply(t,mp);
+        Tuple tmp = t.multiply(mp);
         assertTrue(tmp.equals(tp));
     }
 

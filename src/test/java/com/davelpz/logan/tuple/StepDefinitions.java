@@ -103,7 +103,7 @@ public class StepDefinitions {
 
     @Then("a1 plus a2 = tuple\\({int}, {int}, {int}, {int})")
     public void a1_plus_a2_tuple(Integer int1, Integer int2, Integer int3, Integer int4) {
-        assertTrue(Tuple.add(a1, a2).equals(new Tuple(int1, int2, int3, int4)));
+        assertTrue(a1.add(a2).equals(new Tuple(int1, int2, int3, int4)));
     }
 
     @Given("p1 ← point\\({int}, {int}, {int})")
@@ -118,12 +118,12 @@ public class StepDefinitions {
 
     @Then("p1 subtract p2 = vector\\({int}, {int}, {int})")
     public void p1_subtract_p2_vector(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Tuple.subtract(p1, p2).equals(Tuple.vector(int1, int2, int3)));
+        assertTrue(p1.subtract(p2).equals(Tuple.vector(int1, int2, int3)));
     }
 
     @Then("p subtract v = point\\({int}, {int}, {int})")
     public void p_subtract_v_point(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Tuple.subtract(p, v).equals(Tuple.point(int1, int2, int3)));
+        assertTrue(p.subtract(v).equals(Tuple.point(int1, int2, int3)));
     }
 
     @Given("v1 ← vector\\({int}, {int}, {int})")
@@ -138,7 +138,7 @@ public class StepDefinitions {
 
     @Then("v1 subtract v2 = vector\\({int}, {int}, {int})")
     public void v1_subtract_v2_vector(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Tuple.subtract(v1, v2).equals(Tuple.vector(int1, int2, int3)));
+        assertTrue(v1.subtract(v2).equals(Tuple.vector(int1, int2, int3)));
     }
 
     @Given("zero ← vector\\({int}, {int}, {int})")
@@ -148,23 +148,23 @@ public class StepDefinitions {
 
     @Then("zero subtract v = vector\\({int}, {int}, {int})")
     public void zero_subtract_v_vector(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Tuple.subtract(zero, v).equals(Tuple.vector(int1, int2, int3)));
+        assertTrue(zero.subtract(v).equals(Tuple.vector(int1, int2, int3)));
     }
 
     @Then("negate a = tuple\\({int}, {int}, {int}, {int})")
     public void negate_a_tuple(Integer int1, Integer int2, Integer int3, Integer int4) {
-        assertTrue(Tuple.negate(a).equals(new Tuple(int1, int2, int3, int4)));
+        assertTrue(a.negate().equals(new Tuple(int1, int2, int3, int4)));
     }
 
     @Then("a mul {double} = tuple\\({double}, {double}, {double}, {double})")
     public void a_mul_tuple(Double double1, Double double2, Double double3, Double double4, Double double5) {
-        assertTrue(Tuple.mul(a, double1).equals(new Tuple(double2, double3, double4, double5)));
+        assertTrue(a.mul(double1).equals(new Tuple(double2, double3, double4, double5)));
         assertTrue(Tuple.mul(double1,a).equals(new Tuple(double2, double3, double4, double5)));
     }
 
     @Then("a div {double} = tuple\\({double}, {double}, {double}, {double})")
     public void a_div_tuple(Double double1, Double double2, Double double3, Double double4, Double double5) {
-        assertTrue(Tuple.div(a, double1).equals(new Tuple(double2, double3, double4, double5)));
+        assertTrue(a.div(double1).equals(new Tuple(double2, double3, double4, double5)));
     }
 
     @Then("magnitude\\(v) = {double}")
@@ -209,17 +209,17 @@ public class StepDefinitions {
 
     @Then("dot\\(a, b) = {double}")
     public void dot_a_b(Double double1) {
-        assertEquals(Tuple.dot(a,b), double1, Tuple.EPSILON);
+        assertEquals(a.dot(b), double1, Tuple.EPSILON);
     }
 
     @Then("cross\\(a, b) = vector\\({int}, {int}, {int})")
     public void cross_a_b_vector(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Tuple.cross(a, b).equals(Tuple.vector(int1, int2, int3)));
+        assertTrue(a.cross(b).equals(Tuple.vector(int1, int2, int3)));
     }
 
     @Then("cross\\(b, a) = vector\\({int}, {int}, {int})")
     public void cross_b_a_vector(Integer int1, Integer int2, Integer int3) {
-        assertTrue(Tuple.cross(b, a).equals(Tuple.vector(int1, int2, int3)));
+        assertTrue(b.cross(a).equals(Tuple.vector(int1, int2, int3)));
     }
 
     @Given("c ← color\\({double}, {double}, {double})")
@@ -254,26 +254,21 @@ public class StepDefinitions {
 
     @Then("c1 plus c2 = color\\({double}, {double}, {double})")
     public void c1_plus_c2_color(Double double1, Double double2, Double double3) {
-        assertTrue(Color.add(c1, c2).equals(new Color(double1, double2, double3)));
         assertTrue(c1.add(c2).equals(new Color(double1, double2, double3)));
     }
 
     @Then("c1 subtract c2 = color\\({double}, {double}, {double})")
     public void c1_subtract_c2_color(Double double1, Double double2, Double double3) {
-        assertTrue(Color.subtract(c1, c2).equals(new Color(double1, double2, double3)));
         assertTrue(c1.subtract(c2).equals(new Color(double1, double2, double3)));
     }
 
     @Then("c mul {double} = color\\({double}, {double}, {double})")
     public void c_mul_color(Double double1, Double double2, Double double3, Double double4) {
-        assertTrue(Color.mul(c,double1).equals(new Color(double2, double3, double4)));
-        assertTrue(Color.mul(double1,c).equals(new Color(double2, double3, double4)));
         assertTrue(c.mul(double1).equals(new Color(double2, double3, double4)));
     }
 
     @Then("c1 mul c2 = color\\({double}, {double}, {double})")
     public void c1_mul_c2_color(Double double1, Double double2, Double double3) {
-        assertTrue(Color.mul(c1, c2).equals(new Color(double1, double2, double3)));
         assertTrue(c1.mul(c2).equals(new Color(double1, double2, double3)));
     }
 

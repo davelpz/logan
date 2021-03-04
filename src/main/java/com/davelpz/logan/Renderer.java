@@ -22,7 +22,7 @@ public class Renderer {
         Canvas image = new Canvas(camera.getHsize(), camera.getVsize());
         Ticker ticker = new Ticker(camera.getHsize()*camera.getVsize(), 1);
 
-        PixelStream.genStream(camera.getHsize(),camera.getVsize()).parallel().forEach(p -> {
+        PixelStream.genStream(camera.getHsize(),camera.getVsize()).sequential().forEach(p -> {
             Ray ray = camera.rayForPixel(p.x,p.y);
             Color color = world.color_at(ray);
             image.writePixel(color,p.x,p.y);
@@ -54,7 +54,7 @@ public class Renderer {
             double world_y = half - pixel_size * p.y;
             double world_x = -half + pixel_size * p.x;
             Tuple position = Tuple.point(world_x, world_y, wall_z);
-            Ray r = new Ray(ray_origin, Tuple.subtract(position, ray_origin).normalize());
+            Ray r = new Ray(ray_origin, position.subtract(ray_origin).normalize());
             Intersection[] xs = r.intersects(shape);
             Optional<Intersection> hitOpt = Intersection.hit(xs);
             if (hitOpt.isPresent()) {

@@ -92,8 +92,8 @@ public class TupleTest {
     }
 
     Projectile tick(Environment env, Projectile projectile) {
-        Tuple position = Tuple.add(projectile.position, projectile.velocity);
-        Tuple velocity = Tuple.add(Tuple.add(projectile.velocity,env.gravity), env.wind);
+        Tuple position = projectile.position.add(projectile.velocity);
+        Tuple velocity = projectile.velocity.add(env.gravity).add(env.wind);
         Projectile newProjectile = new Projectile();
         newProjectile.position = position;
         newProjectile.velocity = velocity;
@@ -104,7 +104,7 @@ public class TupleTest {
     public void game() throws IOException {
         Projectile p = new Projectile();
         p.position = Tuple.point(0,1,0);
-        p.velocity = Tuple.mul(Tuple.vector(1,1.8,0).normalize(), 11.25);
+        p.velocity = Tuple.vector(1,1.8,0).normalize().mul(11.25);
 
         Environment e = new Environment();
         e.gravity = Tuple.vector(0,-0.1,0);

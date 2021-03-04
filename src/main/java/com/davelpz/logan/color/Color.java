@@ -19,23 +19,23 @@ public class Color {
         values[2] = c.blue();
     }
 
-    public static Color add(Color a, Color b) {
+    private static Color add(Color a, Color b) {
         return new Color(a.red() + b.red(), a.green() + b.green(), a.blue() + b.blue());
     }
 
-    public static Color subtract(Color a, Color b) {
+    private static Color subtract(Color a, Color b) {
         return new Color(a.red() - b.red(), a.green() - b.green(), a.blue() - b.blue());
     }
 
-    public static Color mul(Color a, Color b) {
+    private static Color mul(Color a, Color b) {
         return new Color(a.red() * b.red(), a.green() * b.green(), a.blue() * b.blue());
     }
 
-    public static Color mul(Color a, double b) {
+    private static Color mul(Color a, double b) {
         return new Color(a.red() * b, a.green() * b, a.blue() * b);
     }
 
-    public static Color mul(double b, Color a) {
+    private static Color mul(double b, Color a) {
         return new Color(a.red() * b, a.green() * b, a.blue() * b);
     }
 
