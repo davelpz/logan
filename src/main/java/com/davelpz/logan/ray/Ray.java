@@ -1,6 +1,7 @@
 package com.davelpz.logan.ray;
 
 import com.davelpz.logan.matrix.Matrix;
+import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
 
@@ -23,26 +24,9 @@ public class Ray {
         return new Ray(m.multiply(this.origin), m.multiply(this.direction));
     }
 
-    public Intersection[] intersect(Sphere s) {
+    public Intersection[] intersect(Shape s) {
         Ray r = this.transform(s.transform.inverse());
-        Tuple sphere_to_ray = r.origin.subtract(Tuple.point(0, 0, 0));
-        double a = r.direction.dot(r.direction);
-        double b = 2 * r.direction.dot(sphere_to_ray);
-        double c = sphere_to_ray.dot(sphere_to_ray) - 1;
-        double discriminant = (b * b) - 4 * a * c;
-
-        if (discriminant < 0) {
-            return new Intersection[0];
-        }
-
-        double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
-        double t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
-
-        if (t1 < t2) {
-            return Intersection.intersections(new Intersection(t1, s), new Intersection(t2, s));
-        } else {
-            return Intersection.intersections(new Intersection(t2, s), new Intersection(t1, s));
-        }
+        return s.intersect(r);
     }
 
     public Tuple getOrigin() {

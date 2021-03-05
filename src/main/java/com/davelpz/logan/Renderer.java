@@ -22,7 +22,7 @@ public class Renderer {
         Canvas image = new Canvas(camera.getHsize(), camera.getVsize());
         Ticker ticker = new Ticker(camera.getHsize()*camera.getVsize(), 1);
 
-        PixelStream.genStream(camera.getHsize(),camera.getVsize()).sequential().forEach(p -> {
+        PixelStream.genStream(camera.getHsize(),camera.getVsize()).parallel().forEach(p -> {
             Ray ray = camera.rayForPixel(p.x,p.y);
             Color color = world.color_at(ray);
             image.writePixel(color,p.x,p.y);
