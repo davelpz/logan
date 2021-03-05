@@ -60,7 +60,7 @@ public class World implements Comparator<Intersection>{
         ArrayList<Intersection> list = new ArrayList<>();
 
         for (Sphere s: objects) {
-            Collections.addAll(list, r.intersects(s));
+            Collections.addAll(list, r.intersect(s));
         }
 
         list.sort(this);

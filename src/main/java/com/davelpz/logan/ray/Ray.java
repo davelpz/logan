@@ -23,7 +23,7 @@ public class Ray {
         return new Ray(m.multiply(this.origin), m.multiply(this.direction));
     }
 
-    public Intersection[] intersects(Sphere s) {
+    public Intersection[] intersect(Sphere s) {
         Ray r = this.transform(s.transform.inverse());
         Tuple sphere_to_ray = r.origin.subtract(Tuple.point(0, 0, 0));
         double a = r.direction.dot(r.direction);

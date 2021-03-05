@@ -8,8 +8,6 @@ import com.davelpz.logan.tuple.Tuple;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.it.Ma;
-import io.cucumber.java.sl.In;
 
 import java.util.List;
 import java.util.Optional;
@@ -658,7 +656,7 @@ public class StepDefinitions {
     Intersection[] xs;
     @When("xs ← intersect\\(s, r)")
     public void xs_intersect_s_r() {
-        xs = r.intersects(s);
+        xs = r.intersect(s);
     }
 
     @Then("xs.count = {int}")

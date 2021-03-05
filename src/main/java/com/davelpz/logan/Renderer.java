@@ -55,7 +55,7 @@ public class Renderer {
             double world_x = -half + pixel_size * p.x;
             Tuple position = Tuple.point(world_x, world_y, wall_z);
             Ray r = new Ray(ray_origin, position.subtract(ray_origin).normalize());
-            Intersection[] xs = r.intersects(shape);
+            Intersection[] xs = r.intersect(shape);
             Optional<Intersection> hitOpt = Intersection.hit(xs);
             if (hitOpt.isPresent()) {
                 Intersection hit = hitOpt.get();
