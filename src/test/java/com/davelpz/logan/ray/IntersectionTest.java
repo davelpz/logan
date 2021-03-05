@@ -3,7 +3,6 @@ package com.davelpz.logan.ray;
 import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
-import io.cucumber.java.sl.In;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

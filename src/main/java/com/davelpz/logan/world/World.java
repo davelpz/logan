@@ -7,6 +7,7 @@ import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.ray.Computation;
 import com.davelpz.logan.ray.Intersection;
 import com.davelpz.logan.ray.Ray;
+import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
 
@@ -14,7 +15,7 @@ import java.util.*;
 
 public class World implements Comparator<Intersection>{
     private List<PointLight> lights;
-    private List<Sphere> objects;
+    private List<Shape> objects;
 
     public World() {
         this.lights = new ArrayList<>();
@@ -48,18 +49,18 @@ public class World implements Comparator<Intersection>{
         this.lights = lights;
     }
 
-    public List<Sphere> getObjects() {
+    public List<Shape> getObjects() {
         return objects;
     }
 
-    public void setObjects(List<Sphere> objects) {
+    public void setObjects(List<Shape> objects) {
         this.objects = objects;
     }
 
     public Intersection[] intersect_world(Ray r) {
         ArrayList<Intersection> list = new ArrayList<>();
 
-        for (Sphere s: objects) {
+        for (Shape s: objects) {
             Collections.addAll(list, r.intersect(s));
         }
 

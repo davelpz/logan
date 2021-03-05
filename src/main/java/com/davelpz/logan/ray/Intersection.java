@@ -1,17 +1,15 @@
 package com.davelpz.logan.ray;
 
-import com.davelpz.logan.shapes.Sphere;
+import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.tuple.Tuple;
-
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
 public class Intersection {
     public double t;
-    public Sphere object;
+    public Shape object;
 
-    public Intersection(double t1, Sphere object) {
+    public Intersection(double t1, Shape object) {
         this.t = t1;
         this.object = object;
     }

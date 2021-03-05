@@ -7,9 +7,9 @@ import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.ray.Computation;
 import com.davelpz.logan.ray.Intersection;
 import com.davelpz.logan.ray.Ray;
+import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
-import io.cucumber.java.sl.In;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -59,7 +59,7 @@ public class WorldTest {
     public void shade_hit() {
         World w = World.defaultWorld();
         Ray r = new Ray(Tuple.point(0,0,-5), Tuple.vector(0,0,1));
-        Sphere shape = w.getObjects().get(0);
+        Shape shape = w.getObjects().get(0);
         Intersection i = new Intersection(4,shape);
         Computation comps = i.prepare_computations(r);
         Color c = w.shade_hit(comps);
@@ -85,9 +85,9 @@ public class WorldTest {
     @Test
     public void color_at3() {
         World w = World.defaultWorld();
-        Sphere outer = w.getObjects().get(0);
+        Shape outer = w.getObjects().get(0);
         outer.material.setAmbient(1);
-        Sphere inner = w.getObjects().get(1);
+        Shape inner = w.getObjects().get(1);
         inner.material.setAmbient(1);
         Ray r = new Ray(Tuple.point(0,0,0.75), Tuple.vector(0,0,-1));
         Color c = w.color_at(r);
