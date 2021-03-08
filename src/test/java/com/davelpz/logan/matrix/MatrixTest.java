@@ -14,21 +14,21 @@ public class MatrixTest {
     public void setHour(Canvas c, double x, double y) {
         y = -y + (550.0 / 2.0);
         x = x + (900.0 / 2.0);
-        c.writePixel(new Color(1,1,1), x,y);
-        c.writePixel(new Color(1,1,1), x-1,y-1);
-        c.writePixel(new Color(1,1,1), x+1,y+1);
-        c.writePixel(new Color(1,1,1), x+1,y-1);
-        c.writePixel(new Color(1,1,1), x-1,y+1);
-        c.writePixel(new Color(1,1,1), x,y+1);
-        c.writePixel(new Color(1,1,1), x,y-1);
-        c.writePixel(new Color(1,1,1), x+1,y);
-        c.writePixel(new Color(1,1,1), x-1,y);
+        c.writePixel(Color.WHITE, x,y);
+        c.writePixel(Color.WHITE, x-1,y-1);
+        c.writePixel(Color.WHITE, x+1,y+1);
+        c.writePixel(Color.WHITE, x+1,y-1);
+        c.writePixel(Color.WHITE, x-1,y+1);
+        c.writePixel(Color.WHITE, x,y+1);
+        c.writePixel(Color.WHITE, x,y-1);
+        c.writePixel(Color.WHITE, x+1,y);
+        c.writePixel(Color.WHITE, x-1,y);
     }
 
     public void setMinute(Canvas c, double x, double y) {
         y = -y + (550.0 / 2.0);
         x = x + (900.0 / 2.0);
-        c.writePixel(new Color(1,1,1), x,y);
+        c.writePixel(Color.WHITE, x,y);
     }
 
     @Test

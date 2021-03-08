@@ -78,7 +78,7 @@ public class World implements Comparator<Intersection>{
         Optional<Intersection> intersectionOptional = Intersection.hit(xs);
 
         if (intersectionOptional.isEmpty()) {
-            return new Color(0,0,0);
+            return Color.BLACK;
         } else {
             Intersection intersection = intersectionOptional.get();
             Computation comps = intersection.prepare_computations(ray);

@@ -58,7 +58,7 @@ public class Main {
         left.getMaterial().setSpecular(0.3);
 
         World world = new World();
-        world.getLights().add(new PointLight(new Color(1,1,1), Tuple.point(-10,10,-10)));
+        world.getLights().add(new PointLight(Color.WHITE, Tuple.point(-10,10,-10)));
 
         world.getObjects().add(floor);
         world.getObjects().add(left_wall);

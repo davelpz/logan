@@ -1,9 +1,13 @@
 package com.davelpz.logan.color;
 
+import com.davelpz.logan.tuple.Tuple;
+
 import java.util.Arrays;
 
 public class Color {
-    public static final double EPSILON = 0.00001;
+    public static final Color BLACK = new Color(0,0,0);
+    public static final Color WHITE = new Color(1,1,1);
+    public static final double EPSILON = Tuple.EPSILON;
 
     private final double[] values = new double[3];
 

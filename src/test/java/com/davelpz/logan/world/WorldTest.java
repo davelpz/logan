@@ -71,7 +71,7 @@ public class WorldTest {
         World w = World.defaultWorld();
         Ray r = new Ray(Tuple.point(0,0,-5), Tuple.vector(0,1,0));
         Color c = w.color_at(r);
-        assertTrue(c.equals(new Color(0,0,0)));
+        assertTrue(c.equals(Color.BLACK));
     }
 
     @Test
@@ -179,7 +179,7 @@ public class WorldTest {
     @Test
     public void test5() {
         World w = new World();
-        w.getLights().add(new PointLight(new Color(1,1,1), Tuple.point(0,0,-10)));
+        w.getLights().add(new PointLight(Color.WHITE, Tuple.point(0,0,-10)));
         Sphere s1 = new Sphere();
         w.getObjects().add(s1);
 

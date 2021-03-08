@@ -113,7 +113,7 @@ public class TupleTest {
         Canvas c = new Canvas(900,550);
 
         for (int i=0;i<195;i++) {
-            c.writePixel(new Color(1,1,1), p.position.x(), 550 - p.position.y());
+            c.writePixel(Color.WHITE, p.position.x(), 550 - p.position.y());
             p = tick(e,p);
         }
 

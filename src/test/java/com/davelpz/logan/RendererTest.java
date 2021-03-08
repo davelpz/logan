@@ -79,7 +79,7 @@ public class RendererTest {
         left.getMaterial().setSpecular(specular);
 
         World world = new World();
-        world.getLights().add(new PointLight(new Color(1,1,1), Tuple.point(-10,10,-10)));
+        world.getLights().add(new PointLight(Color.WHITE, Tuple.point(-10,10,-10)));
 
         world.getObjects().add(floor);
         world.getObjects().add(left_wall);
@@ -141,7 +141,7 @@ public class RendererTest {
         left.getMaterial().setSpecular(specular);
 
         World world = new World();
-        world.getLights().add(new PointLight(new Color(1,1,1), Tuple.point(-10,10,-10)));
+        world.getLights().add(new PointLight(Color.WHITE, Tuple.point(-10,10,-10)));
 
         world.getObjects().add(floor);
         world.getObjects().add(wall);
@@ -149,7 +149,7 @@ public class RendererTest {
         world.getObjects().add(right);
         world.getObjects().add(left);
 
-        Camera c = new Camera(400,200,Math.PI/3.0);
+        Camera c = new Camera(100,50,Math.PI/3.0);
         c.setTransform(World.view_transform(Tuple.point(0,1.5,-5),
                 Tuple.point(0,1,0),
                 Tuple.vector(0,1,0)));

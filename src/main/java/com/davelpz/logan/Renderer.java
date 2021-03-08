@@ -47,7 +47,7 @@ public class Renderer {
         shape.material.getColor().set(1,0.2,1);
 
         Tuple light_position = Tuple.point(-10,10,-10);
-        Color light_color = new Color(1,1,1);
+        Color light_color = Color.WHITE;
         PointLight light = new PointLight(light_color,light_position);
 
         PixelStream.genStream(canvas_pixels,canvas_pixels).parallel().forEach(p -> {
