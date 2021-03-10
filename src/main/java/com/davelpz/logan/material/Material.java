@@ -23,16 +23,21 @@ public class Material {
     }
 
     public Color lighting(PointLight light, Tuple point,
+                          Tuple eyev, Tuple normalv) {
+        return Material.lighting(this,light,point,eyev,normalv,false);
+    }
+
+    public Color lighting(PointLight light, Tuple point,
                     Tuple eyev, Tuple normalv, boolean in_shadow) {
         return Material.lighting(this,light,point,eyev,normalv,in_shadow);
     }
 
-    public static Color lighting(Material material, PointLight light, Tuple point,
+    private static Color lighting(Material material, PointLight light, Tuple point,
                                  Tuple eyev, Tuple normalv) {
         return lighting(material,light,point,eyev,normalv,false);
     }
 
-    public static Color lighting(Material material, PointLight light, Tuple point,
+    private static Color lighting(Material material, PointLight light, Tuple point,
                                  Tuple eyev, Tuple normalv, boolean in_shadow) {
         Color color = material.color;
         if (material.pattern != null) {

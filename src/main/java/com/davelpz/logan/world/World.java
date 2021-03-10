@@ -70,7 +70,7 @@ public class World implements Comparator<Intersection>{
 
     public Color shade_hit(Computation comps) {
         boolean shadowed = is_shadowed(comps.over_point);
-        return Material.lighting(comps.object.material,this.lights.get(0),comps.point,comps.eyev,comps.normalv,shadowed);
+        return comps.object.material.lighting(this.lights.get(0),comps.point,comps.eyev,comps.normalv,shadowed);
     }
 
     public Color color_at(Ray ray) {

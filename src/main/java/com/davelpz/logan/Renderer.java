@@ -62,7 +62,7 @@ public class Renderer {
                 Tuple point = r.position(hit.t);
                 Tuple normal = hit.object.normalAt(point);
                 Tuple eye = r.direction.negate();
-                Color adjustedColor = Material.lighting(hit.object.material,light,point,eye,normal);
+                Color adjustedColor = hit.object.material.lighting(light,point,eye,normal);
                 canvas.writePixel(adjustedColor, p.x, p.y);
             }
 
