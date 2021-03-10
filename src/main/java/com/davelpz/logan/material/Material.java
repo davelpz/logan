@@ -12,6 +12,7 @@ public class Material {
     private double diffuse;
     private double specular;
     private double shininess;
+    private StripePattern pattern;
 
     public Material() {
         color = new Color(1, 1, 1);
@@ -21,6 +22,11 @@ public class Material {
         shininess = 200.0;
     }
 
+    public Color lighting(PointLight light, Tuple point,
+                    Tuple eyev, Tuple normalv, boolean in_shadow) {
+        return Material.lighting(this,light,point,eyev,normalv,in_shadow);
+    }
+
     public static Color lighting(Material material, PointLight light, Tuple point,
                                  Tuple eyev, Tuple normalv) {
         return lighting(material,light,point,eyev,normalv,false);
@@ -28,8 +34,12 @@ public class Material {
 
     public static Color lighting(Material material, PointLight light, Tuple point,
                                  Tuple eyev, Tuple normalv, boolean in_shadow) {
+        Color color = material.color;
+        if (material.pattern != null) {
+            color = material.pattern.stripe_at(point);
+        }
         // combine the surface color with the lights color/intensity
-        Color effective_color = material.color.mul(light.getIntensity());
+        Color effective_color = color.mul(light.getIntensity());
         // find the direction to the light source
         Tuple lightv = light.getPosition().subtract(point).normalize();
         // computer the ambient contribution
@@ -108,6 +118,14 @@ public class Material {
 
     public void setShininess(double shininess) {
         this.shininess = shininess;
+    }
+
+    public StripePattern getPattern() {
+        return pattern;
+    }
+
+    public void setPattern(StripePattern pattern) {
+        this.pattern = pattern;
     }
 
     @Override

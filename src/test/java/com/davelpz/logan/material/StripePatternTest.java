@@ -38,6 +38,7 @@ public class StripePatternTest {
         assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(0.9,0,0))));
         assertTrue(Color.BLACK.equals(pattern.stripe_at(Tuple.point(1,0,0))));
         assertTrue(Color.BLACK.equals(pattern.stripe_at(Tuple.point(-0.1,0,0))));
+        assertTrue(Color.BLACK.equals(pattern.stripe_at(Tuple.point(-1,0,0))));
         assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(-1.1,0,0))));
     }
 }
