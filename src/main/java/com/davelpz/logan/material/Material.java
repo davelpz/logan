@@ -13,7 +13,7 @@ public class Material {
     private double diffuse;
     private double specular;
     private double shininess;
-    private StripePattern pattern;
+    private Pattern pattern;
 
     public Material() {
         color = new Color(1, 1, 1);
@@ -42,7 +42,7 @@ public class Material {
                                   Tuple eyev, Tuple normalv, boolean in_shadow) {
         Color color = material.color;
         if (material.pattern != null) {
-            color = material.pattern.stripe_at_object(object,point);
+            color = material.pattern.pattern_at_shape(object,point);
         }
         // combine the surface color with the lights color/intensity
         Color effective_color = color.mul(light.getIntensity());
@@ -126,7 +126,7 @@ public class Material {
         this.shininess = shininess;
     }
 
-    public StripePattern getPattern() {
+    public Pattern getPattern() {
         return pattern;
     }
 

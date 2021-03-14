@@ -21,28 +21,28 @@ public class StripePatternTest {
     @Test
     public void test2() {
         StripePattern pattern = new StripePattern(Color.WHITE, Color.BLACK);
-        assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(0,0,0))));
-        assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(0,1,0))));
-        assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(0,2,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at(Tuple.point(0,0,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at(Tuple.point(0,1,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at(Tuple.point(0,2,0))));
     }
 
     @Test
     public void test3() {
         StripePattern pattern = new StripePattern(Color.WHITE, Color.BLACK);
-        assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(0,0,0))));
-        assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(0,0,1))));
-        assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(0,0,2))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at(Tuple.point(0,0,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at(Tuple.point(0,0,1))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at(Tuple.point(0,0,2))));
     }
 
     @Test
     public void test4() {
         StripePattern pattern = new StripePattern(Color.WHITE, Color.BLACK);
-        assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(0,0,0))));
-        assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(0.9,0,0))));
-        assertTrue(Color.BLACK.equals(pattern.stripe_at(Tuple.point(1,0,0))));
-        assertTrue(Color.BLACK.equals(pattern.stripe_at(Tuple.point(-0.1,0,0))));
-        assertTrue(Color.BLACK.equals(pattern.stripe_at(Tuple.point(-1,0,0))));
-        assertTrue(Color.WHITE.equals(pattern.stripe_at(Tuple.point(-1.1,0,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at(Tuple.point(0,0,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at(Tuple.point(0.9,0,0))));
+        assertTrue(Color.BLACK.equals(pattern.pattern_at(Tuple.point(1,0,0))));
+        assertTrue(Color.BLACK.equals(pattern.pattern_at(Tuple.point(-0.1,0,0))));
+        assertTrue(Color.BLACK.equals(pattern.pattern_at(Tuple.point(-1,0,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at(Tuple.point(-1.1,0,0))));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class StripePatternTest {
         Shape object = new Sphere();
         object.setTransform(Matrix.scaling(2,2,2));
         StripePattern pattern = new StripePattern(Color.WHITE, Color.BLACK);
-        assertTrue(Color.WHITE.equals(pattern.stripe_at_object(object, Tuple.point(1.5,0,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at_shape(object, Tuple.point(1.5,0,0))));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class StripePatternTest {
         Shape object = new Sphere();
         StripePattern pattern = new StripePattern(Color.WHITE, Color.BLACK);
         pattern.setTransform(Matrix.scaling(2,2,2));
-        assertTrue(Color.WHITE.equals(pattern.stripe_at_object(object, Tuple.point(1.5,0,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at_shape(object, Tuple.point(1.5,0,0))));
     }
 
     @Test
@@ -67,6 +67,6 @@ public class StripePatternTest {
         object.setTransform(Matrix.scaling(2,2,2));
         StripePattern pattern = new StripePattern(Color.WHITE, Color.BLACK);
         pattern.setTransform(Matrix.translation(0.5,0,0));
-        assertTrue(Color.WHITE.equals(pattern.stripe_at_object(object, Tuple.point(2.5,0,0))));
+        assertTrue(Color.WHITE.equals(pattern.pattern_at_shape(object, Tuple.point(2.5,0,0))));
     }
 }
