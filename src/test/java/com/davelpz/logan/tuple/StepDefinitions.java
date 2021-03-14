@@ -3,6 +3,7 @@ package com.davelpz.logan.tuple;
 import com.davelpz.logan.color.Color;
 import com.davelpz.logan.light.PointLight;
 import com.davelpz.logan.material.Material;
+import com.davelpz.logan.shapes.Sphere;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -372,7 +373,7 @@ public class StepDefinitions {
     Color result;
     @When("result ← lighting\\(m, light, position, eyev, normalv)")
     public void result_lighting_m_light_position_eyev_normalv() {
-        result = m.lighting(light,position,eyev,normalv);
+        result = m.lighting(new Sphere(),light,position,eyev,normalv);
     }
 
     @Then("result = color\\({double}, {double}, {double})")
@@ -388,7 +389,7 @@ public class StepDefinitions {
 
     @When("result ← lighting\\(m, light, position, eyev, normalv, in_shadow)")
     public void result_lighting_m_light_position_eyev_normalv_in_shadow() {
-        result = m.lighting(light,position,eyev,normalv,in_shadow);
+        result = m.lighting(new Sphere(),light,position,eyev,normalv,in_shadow);
     }
 
 }

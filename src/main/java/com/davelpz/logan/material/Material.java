@@ -2,6 +2,7 @@ package com.davelpz.logan.material;
 
 import com.davelpz.logan.color.Color;
 import com.davelpz.logan.light.PointLight;
+import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.tuple.Tuple;
 
 import java.util.Objects;
@@ -22,26 +23,26 @@ public class Material {
         shininess = 200.0;
     }
 
-    public Color lighting(PointLight light, Tuple point,
+    public Color lighting(Shape object, PointLight light, Tuple point,
                           Tuple eyev, Tuple normalv) {
-        return Material.lighting(this,light,point,eyev,normalv,false);
+        return Material.lighting(this,object,light,point,eyev,normalv,false);
     }
 
-    public Color lighting(PointLight light, Tuple point,
+    public Color lighting(Shape object, PointLight light, Tuple point,
                     Tuple eyev, Tuple normalv, boolean in_shadow) {
-        return Material.lighting(this,light,point,eyev,normalv,in_shadow);
+        return Material.lighting(this,object,light,point,eyev,normalv,in_shadow);
     }
 
-    private static Color lighting(Material material, PointLight light, Tuple point,
+    private static Color lighting(Material material, Shape object, PointLight light, Tuple point,
                                  Tuple eyev, Tuple normalv) {
-        return lighting(material,light,point,eyev,normalv,false);
+        return lighting(material,object,light,point,eyev,normalv,false);
     }
 
-    private static Color lighting(Material material, PointLight light, Tuple point,
-                                 Tuple eyev, Tuple normalv, boolean in_shadow) {
+    private static Color lighting(Material material, Shape object, PointLight light, Tuple point,
+                                  Tuple eyev, Tuple normalv, boolean in_shadow) {
         Color color = material.color;
         if (material.pattern != null) {
-            color = material.pattern.stripe_at(point);
+            color = material.pattern.stripe_at_object(object,point);
         }
         // combine the surface color with the lights color/intensity
         Color effective_color = color.mul(light.getIntensity());

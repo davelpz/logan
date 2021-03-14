@@ -5,6 +5,7 @@ import com.davelpz.logan.canvas.Canvas;
 import com.davelpz.logan.color.Color;
 import com.davelpz.logan.light.PointLight;
 import com.davelpz.logan.material.Material;
+import com.davelpz.logan.material.StripePattern;
 import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.shapes.Plane;
 import com.davelpz.logan.shapes.Sphere;
@@ -113,6 +114,9 @@ public class RendererTest {
         wall.setMaterial(new Material());
         wall.getMaterial().getColor().set(1,0.9,0.9);
         wall.getMaterial().setSpecular(0);
+        StripePattern pattern = new StripePattern(new Color(.5,.5,.5),Color.WHITE);
+        pattern.setTransform(Matrix.scaling(.1,.1,.1).multiply(Matrix.rotationY(Math.PI/2.0)));
+        wall.getMaterial().setPattern(pattern);
 
         double specular = 0.3;
         double diffuse = 0.7;
@@ -123,6 +127,9 @@ public class RendererTest {
         middle.getMaterial().setColor(new Color(0.1,1,0.5));
         middle.getMaterial().setDiffuse(diffuse);
         middle.getMaterial().setSpecular(specular);
+        StripePattern pattern2 = new StripePattern(new Color(.5,.5,.5),new Color(0.1,1,0.5));
+        pattern2.setTransform(Matrix.scaling(.03,.03,.03).multiply(Matrix.rotationX(Math.PI/2.0)));
+        middle.getMaterial().setPattern(pattern2);
 
         Sphere right = new Sphere();
         right.setTransform(Matrix.translation(1.5,0.5,-0.5)
@@ -149,7 +156,7 @@ public class RendererTest {
         world.getObjects().add(right);
         world.getObjects().add(left);
 
-        Camera c = new Camera(100,50,Math.PI/3.0);
+        Camera c = new Camera(600,300,Math.PI/3.0);
         c.setTransform(World.view_transform(Tuple.point(0,1.5,-5),
                 Tuple.point(0,1,0),
                 Tuple.vector(0,1,0)));

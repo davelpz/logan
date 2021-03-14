@@ -1,6 +1,7 @@
 package com.davelpz.logan.material;
 
 import com.davelpz.logan.color.Color;
+import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.tuple.Tuple;
 
 public class StripePattern extends Pattern {
@@ -19,5 +20,11 @@ public class StripePattern extends Pattern {
         } else {
             return b;
         }
+    }
+
+    public Color stripe_at_object(Shape object, Tuple world_point) {
+        Tuple object_point = object.transform.inverse().multiply(world_point);
+        Tuple pattern_point = this.getTransform().inverse().multiply(object_point);
+        return stripe_at(pattern_point);
     }
 }
