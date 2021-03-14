@@ -130,7 +130,7 @@ public class Material {
         return pattern;
     }
 
-    public void setPattern(StripePattern pattern) {
+    public void setPattern(Pattern pattern) {
         this.pattern = pattern;
     }
 
