@@ -6,6 +6,7 @@ import com.davelpz.logan.color.Color;
 import com.davelpz.logan.light.PointLight;
 import com.davelpz.logan.material.GradientPattern;
 import com.davelpz.logan.material.Material;
+import com.davelpz.logan.material.RingPattern;
 import com.davelpz.logan.material.StripePattern;
 import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.shapes.Plane;
@@ -109,9 +110,11 @@ public class RendererTest {
         floor.setMaterial(new Material());
         floor.getMaterial().getColor().set(1,0.9,0.9);
         floor.getMaterial().setSpecular(0);
-        GradientPattern pattern1 = new GradientPattern(Color.WHITE,Color.BLACK);
-        pattern1.setTransform(Matrix.translation(4,0,0).multiply(Matrix.scaling(8,8,8)));
-        floor.getMaterial().setPattern(pattern1);
+        //GradientPattern pattern1 = new GradientPattern(Color.WHITE,Color.BLACK);
+        //pattern1.setTransform(Matrix.translation(4,0,0).multiply(Matrix.scaling(8,8,8)));
+        //floor.getMaterial().setPattern(pattern1);
+        RingPattern pattern3 = new RingPattern(Color.WHITE,Color.BLACK);
+        floor.getMaterial().setPattern(pattern3);
 
         Plane wall = new Plane();
         wall.setTransform(Matrix.translation(0,0,3).multiply(Matrix.rotationX(-Math.PI/2)));
