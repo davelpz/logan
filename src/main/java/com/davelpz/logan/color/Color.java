@@ -45,6 +45,10 @@ public class Color implements Pattern {
         return new Color(a.red() * b, a.green() * b, a.blue() * b);
     }
 
+    private static Color div(Color a, double b) {
+        return new Color(a.red() / b, a.green() / b, a.blue() / b);
+    }
+
     public static double clamp(double value, double min, double max) {
         if (value < min)
             value = min;
@@ -100,6 +104,10 @@ public class Color implements Pattern {
 
     public Color mul(Color b) {
         return mul(this, b);
+    }
+
+    public Color div(double b) {
+        return div(this, b);
     }
 
     public void clamp(double min, double max) {
