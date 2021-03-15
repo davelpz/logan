@@ -1,7 +1,6 @@
 package com.davelpz.logan.material.pattern;
 
 import com.davelpz.logan.color.Color;
-import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.tuple.Tuple;
 
 public class BlendedPattern extends AbstractPattern {
