@@ -16,8 +16,8 @@ public class GradientPattern extends AbstractPattern {
 
     @Override
     public Color pattern_at(Tuple point) {
-        Color ca = a.pattern_at(point);
-        Color cb = b.pattern_at(point);
+        Color ca = a.pattern_at_object_point(point);
+        Color cb = b.pattern_at_object_point(point);
         Color distance = cb.subtract(ca);
         double fraction = point.x() - Math.floor(point.x());
         return ca.add(distance.mul(fraction));

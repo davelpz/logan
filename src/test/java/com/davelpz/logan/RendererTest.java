@@ -114,10 +114,10 @@ public class RendererTest {
         //pattern1.setTransform(Matrix.translation(4,0,0).multiply(Matrix.scaling(8,8,8)));
         //floor.getMaterial().setPattern(pattern1);
         RingPattern pattern3 = new RingPattern(Color.WHITE,Color.BLACK);
-        //pattern3.setTransform(Matrix.scaling(0.1,0.1,0.1));
+        pattern3.setTransform(Matrix.scaling(0.1,0.1,0.1));
         //floor.getMaterial().setPattern(pattern3);
         //Pattern pattern4 = new CheckerPattern(new Color(0,0,1),new Color(1,1,0));
-        Pattern pattern4 = new CheckerPattern(pattern1,pattern);
+        Pattern pattern4 = new CheckerPattern(pattern1,pattern3);
         floor.getMaterial().setPattern(pattern4);
 
         Plane wall = new Plane();

@@ -21,9 +21,9 @@ public class CheckerPattern extends AbstractPattern {
         double z = Math.floor(point.z());
 
         if (((x+y+z) % 2) == 0) {
-            return a.pattern_at(point);
+            return a.pattern_at_object_point(point);
         }
-        return b.pattern_at(point);
+        return b.pattern_at_object_point(point);
     }
 
     @Override

@@ -10,6 +10,10 @@ public interface Pattern {
 
     default Color pattern_at_shape(Shape object, Tuple world_point) {
         Tuple object_point = object.transform.inverse().multiply(world_point);
+        return pattern_at_object_point(object_point);
+    }
+
+    default Color pattern_at_object_point(Tuple object_point) {
         Tuple pattern_point = this.getTransform().inverse().multiply(object_point);
         return pattern_at(pattern_point);
     }

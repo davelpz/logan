@@ -18,9 +18,9 @@ public class StripePattern extends AbstractPattern {
     public Color pattern_at(Tuple point) {
         double x = point.x();
         if ( ( (Math.floor(x)) % 2) == 0) {
-            return a.pattern_at(point);
+            return a.pattern_at_object_point(point);
         } else {
-            return b.pattern_at(point);
+            return b.pattern_at_object_point(point);
         }
     }
 

@@ -19,9 +19,9 @@ public class RingPattern extends AbstractPattern {
     public Color pattern_at(Tuple point) {
         double dist = Math.sqrt(point.x()*point.x() + point.z()*point.z());
         if ((Math.floor(dist) % 2) == 0) {
-            return a.pattern_at(point);
+            return a.pattern_at_object_point(point);
         }
-        return b.pattern_at(point);
+        return b.pattern_at_object_point(point);
     }
 
     @Override
