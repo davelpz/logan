@@ -1,6 +1,7 @@
 package com.davelpz.logan.material;
 
 import com.davelpz.logan.color.Color;
+import com.davelpz.logan.material.pattern.StripePattern;
 import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.shapes.Sphere;

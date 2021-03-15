@@ -1,9 +1,9 @@
-package com.davelpz.logan.material;
+package com.davelpz.logan.material.pattern;
 
 import com.davelpz.logan.color.Color;
 import com.davelpz.logan.tuple.Tuple;
 
-public class GradientPattern extends Pattern {
+public class GradientPattern extends AbstractPattern {
     public Color a;
     public Color b;
 

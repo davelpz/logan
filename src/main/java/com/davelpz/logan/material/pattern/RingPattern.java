@@ -1,9 +1,10 @@
-package com.davelpz.logan.material;
+package com.davelpz.logan.material.pattern;
 
 import com.davelpz.logan.color.Color;
+import com.davelpz.logan.material.pattern.Pattern;
 import com.davelpz.logan.tuple.Tuple;
 
-public class RingPattern extends Pattern {
+public class RingPattern extends AbstractPattern {
     public Color a;
     public Color b;
 

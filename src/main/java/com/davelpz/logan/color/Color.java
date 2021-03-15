@@ -1,10 +1,12 @@
 package com.davelpz.logan.color;
 
+import com.davelpz.logan.material.pattern.Pattern;
+import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.tuple.Tuple;
 
 import java.util.Arrays;
 
-public class Color {
+public class Color implements Pattern {
     public static final Color BLACK = new Color(0,0,0);
     public static final Color WHITE = new Color(1,1,1);
     public static final double EPSILON = Tuple.EPSILON;
@@ -127,5 +129,15 @@ public class Color {
 
     @Override public String toString() {
         return "Color{" + "values=" + Arrays.toString(values) + '}';
+    }
+
+    @Override
+    public Matrix getTransform() {
+        return Matrix.identity4;
+    }
+
+    @Override
+    public Color pattern_at(Tuple point) {
+        return this;
     }
 }

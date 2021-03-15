@@ -2,6 +2,7 @@ package com.davelpz.logan.material;
 
 import com.davelpz.logan.color.Color;
 import com.davelpz.logan.light.PointLight;
+import com.davelpz.logan.material.pattern.StripePattern;
 import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;

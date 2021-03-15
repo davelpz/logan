@@ -4,10 +4,11 @@ import com.davelpz.logan.camera.Camera;
 import com.davelpz.logan.canvas.Canvas;
 import com.davelpz.logan.color.Color;
 import com.davelpz.logan.light.PointLight;
-import com.davelpz.logan.material.GradientPattern;
 import com.davelpz.logan.material.Material;
-import com.davelpz.logan.material.RingPattern;
-import com.davelpz.logan.material.StripePattern;
+import com.davelpz.logan.material.pattern.CheckerPattern;
+import com.davelpz.logan.material.pattern.Pattern;
+import com.davelpz.logan.material.pattern.RingPattern;
+import com.davelpz.logan.material.pattern.StripePattern;
 import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.shapes.Plane;
 import com.davelpz.logan.shapes.Sphere;
@@ -113,8 +114,10 @@ public class RendererTest {
         //GradientPattern pattern1 = new GradientPattern(Color.WHITE,Color.BLACK);
         //pattern1.setTransform(Matrix.translation(4,0,0).multiply(Matrix.scaling(8,8,8)));
         //floor.getMaterial().setPattern(pattern1);
-        RingPattern pattern3 = new RingPattern(Color.WHITE,Color.BLACK);
-        floor.getMaterial().setPattern(pattern3);
+        //RingPattern pattern3 = new RingPattern(Color.WHITE,Color.BLACK);
+        //floor.getMaterial().setPattern(pattern3);
+        Pattern pattern4 = new CheckerPattern(new Color(0,0,1),new Color(1,1,0));
+        floor.getMaterial().setPattern(pattern4);
 
         Plane wall = new Plane();
         wall.setTransform(Matrix.translation(0,0,3).multiply(Matrix.rotationX(-Math.PI/2)));
@@ -163,7 +166,7 @@ public class RendererTest {
         world.getObjects().add(right);
         world.getObjects().add(left);
 
-        Camera c = new Camera(300,150,Math.PI/3.0);
+        Camera c = new Camera(600,300,Math.PI/3.0);
         c.setTransform(World.view_transform(Tuple.point(0,1.5,-5),
                 Tuple.point(0,1,0),
                 Tuple.vector(0,1,0)));
