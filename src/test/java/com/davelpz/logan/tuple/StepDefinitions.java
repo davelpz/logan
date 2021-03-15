@@ -331,7 +331,7 @@ public class StepDefinitions {
 
     @Then("m.color = color\\({int}, {int}, {int})")
     public void m_color_color(Integer int1, Integer int2, Integer int3) {
-        assertTrue(m.getColor().equals(new Color(int1,int2,int3)));
+        assertTrue(m.getPattern().equals(new Color(int1,int2,int3)));
     }
 
     @Then("m.ambient = {double}")

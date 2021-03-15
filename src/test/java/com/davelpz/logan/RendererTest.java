@@ -39,7 +39,7 @@ public class RendererTest {
         Sphere floor = new Sphere();
         floor.setTransform(Matrix.scaling(10,0.01,10));
         floor.setMaterial(new Material());
-        floor.getMaterial().getColor().set(1,0.9,0.9);
+        floor.getMaterial().setPattern(new Color(1,0.9,0.9));
         floor.getMaterial().setSpecular(0);
 
         Sphere left_wall = new Sphere();
@@ -109,7 +109,7 @@ public class RendererTest {
         //floor.setTransform(Matrix.translation(0,0.0,0));
         //floor.setTransform(Matrix.rotationX(-Math.PI/16.0));
         floor.setMaterial(new Material());
-        floor.getMaterial().getColor().set(1,0.9,0.9);
+        floor.getMaterial().setPattern(new Color(1,0.9,0.9));
         floor.getMaterial().setSpecular(0);
         //GradientPattern pattern1 = new GradientPattern(Color.WHITE,Color.BLACK);
         //pattern1.setTransform(Matrix.translation(4,0,0).multiply(Matrix.scaling(8,8,8)));
@@ -122,7 +122,7 @@ public class RendererTest {
         Plane wall = new Plane();
         wall.setTransform(Matrix.translation(0,0,3).multiply(Matrix.rotationX(-Math.PI/2)));
         wall.setMaterial(new Material());
-        wall.getMaterial().getColor().set(1,0.9,0.9);
+        wall.getMaterial().setPattern(new Color(1,0.9,0.9));
         wall.getMaterial().setSpecular(0);
         StripePattern pattern = new StripePattern(new Color(.5,.5,.5),Color.WHITE);
         pattern.setTransform(Matrix.scaling(.1,.1,.1).multiply(Matrix.rotationY(Math.PI/2.0)));

@@ -9,7 +9,6 @@ import com.davelpz.logan.tuple.Tuple;
 import java.util.Objects;
 
 public class Material {
-    private Color color;
     private double ambient;
     private double diffuse;
     private double specular;
@@ -17,7 +16,7 @@ public class Material {
     private Pattern pattern;
 
     public Material() {
-        color = new Color(1, 1, 1);
+        pattern = new Color(1, 1, 1);
         ambient = 0.1;
         diffuse = 0.9;
         specular = 0.9;
@@ -41,10 +40,7 @@ public class Material {
 
     private static Color lighting(Material material, Shape object, PointLight light, Tuple point,
                                   Tuple eyev, Tuple normalv, boolean in_shadow) {
-        Color color = material.color;
-        if (material.pattern != null) {
-            color = material.pattern.pattern_at_shape(object,point);
-        }
+        Color color = material.pattern.pattern_at_shape(object,point);
         // combine the surface color with the lights color/intensity
         Color effective_color = color.mul(light.getIntensity());
         // find the direction to the light source
@@ -87,12 +83,12 @@ public class Material {
         }
     }
 
-    public Color getColor() {
-        return color;
+    public Color getColor2() {
+        return null;
     }
 
     public void setColor(Color color) {
-        this.color = color;
+        this.pattern = color;
     }
 
     public double getAmbient() {
@@ -140,11 +136,11 @@ public class Material {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Material material = (Material) o;
-        return Double.compare(material.ambient, ambient) == 0 && Double.compare(material.diffuse, diffuse) == 0 && Double.compare(material.specular, specular) == 0 && Double.compare(material.shininess, shininess) == 0 && color.equals(material.color);
+        return Double.compare(material.ambient, ambient) == 0 && Double.compare(material.diffuse, diffuse) == 0 && Double.compare(material.specular, specular) == 0 && Double.compare(material.shininess, shininess) == 0 && pattern.equals(material.pattern);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(color, ambient, diffuse, specular, shininess);
+        return Objects.hash(ambient, diffuse, specular, shininess, pattern);
     }
 }

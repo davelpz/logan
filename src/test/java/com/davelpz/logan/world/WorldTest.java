@@ -91,7 +91,8 @@ public class WorldTest {
         inner.material.setAmbient(1);
         Ray r = new Ray(Tuple.point(0,0,0.75), Tuple.vector(0,0,-1));
         Color c = w.color_at(r);
-        assertTrue(c.equals(inner.material.getColor()));
+        Color b = (Color) inner.material.getPattern();
+        assertTrue(c.equals(b));
     }
 
     @Test

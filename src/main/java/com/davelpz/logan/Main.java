@@ -17,7 +17,7 @@ public class Main {
         Sphere floor = new Sphere();
         floor.setTransform(Matrix.scaling(10,0.01,10));
         floor.setMaterial(new Material());
-        floor.getMaterial().getColor().set(1,0.9,0.9);
+        floor.getMaterial().setPattern(new Color(1,0.9,0.9));
         floor.getMaterial().setSpecular(0);
 
         Sphere left_wall = new Sphere();

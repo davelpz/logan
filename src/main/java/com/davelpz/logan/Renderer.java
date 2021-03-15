@@ -44,7 +44,7 @@ public class Renderer {
         Color color = new Color(1, 0, 0);
         Sphere shape = new Sphere();
         //shape.setTransform(Matrix.multiply(Matrix.shearing(1,0,0,0,0,0),Matrix.scaling(0.5,1,1)));
-        shape.material.getColor().set(1,0.2,1);
+        shape.material.setPattern(new Color(1,0.2,1));
 
         Tuple light_position = Tuple.point(-10,10,-10);
         Color light_color = Color.WHITE;

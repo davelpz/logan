@@ -119,12 +119,17 @@ public class Color implements Pattern {
             values[2] = max;
     }
 
-    public boolean equals(Color b) {
-        return equals(b, EPSILON);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Color b = (Color) o;
+        return (Math.abs(red() - b.red()) < EPSILON) && (Math.abs(green() - b.green()) < EPSILON) && (Math.abs(blue() - b.blue()) < EPSILON);
     }
 
-    public boolean equals(Color b, double delta) {
-        return (Math.abs(red() - b.red()) < delta) && (Math.abs(green() - b.green()) < delta) && (Math.abs(blue() - b.blue()) < delta);
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(values);
     }
 
     @Override public String toString() {
