@@ -7,10 +7,10 @@ import com.davelpz.logan.tuple.Tuple;
 import java.util.Objects;
 
 public class RingPattern extends AbstractPattern {
-    public Color a;
-    public Color b;
+    public Pattern a;
+    public Pattern b;
 
-    public RingPattern(Color a, Color b) {
+    public RingPattern(Pattern a, Pattern b) {
         this.a = a;
         this.b = b;
     }
@@ -19,9 +19,9 @@ public class RingPattern extends AbstractPattern {
     public Color pattern_at(Tuple point) {
         double dist = Math.sqrt(point.x()*point.x() + point.z()*point.z());
         if ((Math.floor(dist) % 2) == 0) {
-            return a;
+            return a.pattern_at(point);
         }
-        return b;
+        return b.pattern_at(point);
     }
 
     @Override

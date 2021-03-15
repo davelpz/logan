@@ -7,10 +7,10 @@ import com.davelpz.logan.tuple.Tuple;
 import java.util.Objects;
 
 public class StripePattern extends AbstractPattern {
-    public Color a;
-    public Color b;
+    public Pattern a;
+    public Pattern b;
 
-    public StripePattern(Color a, Color b) {
+    public StripePattern(Pattern a, Pattern b) {
         this.a = a;
         this.b = b;
     }
@@ -18,9 +18,9 @@ public class StripePattern extends AbstractPattern {
     public Color pattern_at(Tuple point) {
         double x = point.x();
         if ( ( (Math.floor(x)) % 2) == 0) {
-            return a;
+            return a.pattern_at(point);
         } else {
-            return b;
+            return b.pattern_at(point);
         }
     }
 

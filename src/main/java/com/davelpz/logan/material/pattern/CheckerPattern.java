@@ -6,10 +6,10 @@ import com.davelpz.logan.tuple.Tuple;
 import java.util.Objects;
 
 public class CheckerPattern extends AbstractPattern {
-    public Color a;
-    public Color b;
+    public Pattern a;
+    public Pattern b;
 
-    public CheckerPattern(Color a, Color b) {
+    public CheckerPattern(Pattern a, Pattern b) {
         this.a = a;
         this.b = b;
     }
@@ -21,9 +21,9 @@ public class CheckerPattern extends AbstractPattern {
         double z = Math.floor(point.z());
 
         if (((x+y+z) % 2) == 0) {
-            return a;
+            return a.pattern_at(point);
         }
-        return b;
+        return b.pattern_at(point);
     }
 
     @Override

@@ -6,19 +6,21 @@ import com.davelpz.logan.tuple.Tuple;
 import java.util.Objects;
 
 public class GradientPattern extends AbstractPattern {
-    public Color a;
-    public Color b;
+    public Pattern a;
+    public Pattern b;
 
-    public GradientPattern(Color a, Color b) {
+    public GradientPattern(Pattern a, Pattern b) {
         this.a = a;
         this.b = b;
     }
 
     @Override
     public Color pattern_at(Tuple point) {
-        Color distance = b.subtract(a);
+        Color ca = a.pattern_at(point);
+        Color cb = b.pattern_at(point);
+        Color distance = cb.subtract(ca);
         double fraction = point.x() - Math.floor(point.x());
-        return a.add(distance.mul(fraction));
+        return ca.add(distance.mul(fraction));
     }
 
     @Override

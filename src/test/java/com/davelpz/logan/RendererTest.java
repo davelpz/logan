@@ -5,10 +5,7 @@ import com.davelpz.logan.canvas.Canvas;
 import com.davelpz.logan.color.Color;
 import com.davelpz.logan.light.PointLight;
 import com.davelpz.logan.material.Material;
-import com.davelpz.logan.material.pattern.CheckerPattern;
-import com.davelpz.logan.material.pattern.Pattern;
-import com.davelpz.logan.material.pattern.RingPattern;
-import com.davelpz.logan.material.pattern.StripePattern;
+import com.davelpz.logan.material.pattern.*;
 import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.shapes.Plane;
 import com.davelpz.logan.shapes.Sphere;
@@ -111,12 +108,16 @@ public class RendererTest {
         floor.setMaterial(new Material());
         floor.getMaterial().setPattern(new Color(1,0.9,0.9));
         floor.getMaterial().setSpecular(0);
-        //GradientPattern pattern1 = new GradientPattern(Color.WHITE,Color.BLACK);
+        StripePattern pattern = new StripePattern(new Color(.5,.5,.5),Color.WHITE);
+        pattern.setTransform(Matrix.scaling(.1,.1,.1).multiply(Matrix.rotationY(Math.PI/2.0)));
+        GradientPattern pattern1 = new GradientPattern(Color.WHITE,Color.BLACK);
         //pattern1.setTransform(Matrix.translation(4,0,0).multiply(Matrix.scaling(8,8,8)));
         //floor.getMaterial().setPattern(pattern1);
-        //RingPattern pattern3 = new RingPattern(Color.WHITE,Color.BLACK);
+        RingPattern pattern3 = new RingPattern(Color.WHITE,Color.BLACK);
+        //pattern3.setTransform(Matrix.scaling(0.1,0.1,0.1));
         //floor.getMaterial().setPattern(pattern3);
-        Pattern pattern4 = new CheckerPattern(new Color(0,0,1),new Color(1,1,0));
+        //Pattern pattern4 = new CheckerPattern(new Color(0,0,1),new Color(1,1,0));
+        Pattern pattern4 = new CheckerPattern(pattern1,pattern);
         floor.getMaterial().setPattern(pattern4);
 
         Plane wall = new Plane();
@@ -124,8 +125,6 @@ public class RendererTest {
         wall.setMaterial(new Material());
         wall.getMaterial().setPattern(new Color(1,0.9,0.9));
         wall.getMaterial().setSpecular(0);
-        StripePattern pattern = new StripePattern(new Color(.5,.5,.5),Color.WHITE);
-        pattern.setTransform(Matrix.scaling(.1,.1,.1).multiply(Matrix.rotationY(Math.PI/2.0)));
         wall.getMaterial().setPattern(pattern);
 
         double specular = 0.3;
