@@ -202,4 +202,30 @@ public class RendererTest {
         Canvas canvas = Renderer.render(c,world);
         canvas.canvasToPPMFile("output.ppm");
     }
+
+    @Test
+    public void testRender5() throws IOException {
+        Plane floor = new Plane();
+        floor.setMaterial(new Material());
+        floor.getMaterial().setPattern(new Color(1,0.9,0.9));
+        floor.getMaterial().setSpecular(0);
+        CheckerPattern checkerPattern1 = new CheckerPattern(new Color(0.55,1,0.55), new Color(1,1,1));
+        checkerPattern1.setTransform(Matrix.rotationY(Math.PI/2.0));
+        Perturb perturb = new Perturb(checkerPattern1, .2);
+        floor.getMaterial().setPattern(perturb);
+
+
+        World world = new World();
+        world.getLights().add(new PointLight(Color.WHITE, Tuple.point(-10,10,-10)));
+
+        world.getObjects().add(floor);
+
+        Camera c = new Camera(600,300,Math.PI/3.0);
+        c.setTransform(World.view_transform(Tuple.point(0,1.5,-5),
+                Tuple.point(0,1,0),
+                Tuple.vector(0,1,0)));
+
+        Canvas canvas = Renderer.render(c,world);
+        canvas.canvasToPPMFile("output.ppm");
+    }
 }

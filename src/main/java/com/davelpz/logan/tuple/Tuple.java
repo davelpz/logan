@@ -26,6 +26,10 @@ public class Tuple {
         return new Tuple(a.x() + b.x(), a.y() + b.y(), a.z() + b.z(), a.w() + b.w());
     }
 
+    private static Tuple add(Tuple a, double b) {
+        return new Tuple(a.x() + b, a.y() + b, a.z() + b, a.w() + b);
+    }
+
     private static Tuple subtract(Tuple a, Tuple b) {
         return new Tuple(a.x() - b.x(), a.y() - b.y(), a.z() - b.z(), a.w() - b.w());
     }
@@ -107,6 +111,10 @@ public class Tuple {
     }
 
     public Tuple add(Tuple b) {
+        return add(this, b);
+    }
+
+    public Tuple add(double b) {
         return add(this, b);
     }
 
