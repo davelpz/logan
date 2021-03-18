@@ -214,11 +214,24 @@ public class RendererTest {
         Perturb perturb = new Perturb(checkerPattern1, .2);
         floor.getMaterial().setPattern(perturb);
 
+        double specular = 0.3;
+        double diffuse = 0.7;
+        Sphere middle = new Sphere();
+        middle.setTransform(Matrix.translation(-0.5,1,0.5));
+        middle.setMaterial(new Material());
+        middle.getMaterial().setColor(new Color(0.1,1,0.5));
+        middle.getMaterial().setDiffuse(diffuse);
+        middle.getMaterial().setSpecular(specular);
+        StripePattern pattern2 = new StripePattern(new Color(.5,.5,.5),new Color(0.1,1,0.5));
+        pattern2.setTransform(Matrix.scaling(.07,.07,.07).multiply(Matrix.rotationX(Math.PI/2.0)));
+        Perturb perturb2 = new Perturb(pattern2, .4);
+        middle.getMaterial().setPattern(perturb2);
 
         World world = new World();
         world.getLights().add(new PointLight(Color.WHITE, Tuple.point(-10,10,-10)));
 
         world.getObjects().add(floor);
+        world.getObjects().add(middle);
 
         Camera c = new Camera(600,300,Math.PI/3.0);
         c.setTransform(World.view_transform(Tuple.point(0,1.5,-5),

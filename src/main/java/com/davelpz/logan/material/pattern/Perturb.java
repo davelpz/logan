@@ -1,11 +1,13 @@
 package com.davelpz.logan.material.pattern;
 
 import com.davelpz.logan.color.Color;
+import com.davelpz.logan.noise.ImprovedNoise;
 import com.davelpz.logan.noise.Perlin;
 import com.davelpz.logan.tuple.Tuple;
 
 public class Perturb extends AbstractPattern {
-    Perlin noise = new Perlin();
+    //Perlin noise = new Perlin();
+    ImprovedNoise noise = new ImprovedNoise();
     Pattern a;
     double scale;
 
