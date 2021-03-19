@@ -28,4 +28,10 @@ public class MaterialTest {
         assertTrue(Color.WHITE.equals(c1));
         assertTrue(Color.BLACK.equals(c2));
     }
+
+    @Test
+    public void getReflective() {
+        Material m = new Material();
+        assertEquals(0.0, m.getReflective(), 0.00001);
+    }
 }

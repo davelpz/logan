@@ -9,6 +9,7 @@ public class Computation {
     public Tuple point;
     public Tuple eyev;
     public Tuple normalv;
+    public Tuple reflectv;
     public boolean inside;
     public Tuple over_point;
 }

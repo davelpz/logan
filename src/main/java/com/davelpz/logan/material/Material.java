@@ -13,6 +13,7 @@ public class Material {
     private double diffuse;
     private double specular;
     private double shininess;
+    private double reflective;
     private Pattern pattern;
 
     public Material() {
@@ -20,6 +21,7 @@ public class Material {
         ambient = 0.1;
         diffuse = 0.9;
         specular = 0.9;
+        reflective = 0.0;
         shininess = 200.0;
     }
 
@@ -121,6 +123,14 @@ public class Material {
 
     public void setShininess(double shininess) {
         this.shininess = shininess;
+    }
+
+    public double getReflective() {
+        return reflective;
+    }
+
+    public void setReflective(double reflective) {
+        this.reflective = reflective;
     }
 
     public Pattern getPattern() {

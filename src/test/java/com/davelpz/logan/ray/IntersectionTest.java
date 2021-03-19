@@ -1,8 +1,11 @@
 package com.davelpz.logan.ray;
 
 import com.davelpz.logan.matrix.Matrix;
+import com.davelpz.logan.shapes.Plane;
+import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
+import io.cucumber.java.sl.In;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -56,5 +59,14 @@ public class IntersectionTest {
 
         assertTrue(comps.over_point.z() < (Tuple.EPSILON/2.0));
         assertTrue(comps.point.z() > comps.over_point.z());
+    }
+
+    @Test
+    public void testPrepare_computations() {
+        Shape shape = new Plane();
+        Ray r = new Ray(Tuple.point(0,1,-1), Tuple.vector(0,-Math.sqrt(2)/2.0,Math.sqrt(2)/2.0));
+        Intersection i = new Intersection(Math.sqrt(2),shape);
+        Computation comps = i.prepare_computations(r);
+        assertTrue(comps.reflectv.equals(Tuple.vector(0,Math.sqrt(2)/2.0,Math.sqrt(2)/2.0),0.0001));
     }
 }
