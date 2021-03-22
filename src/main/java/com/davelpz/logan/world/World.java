@@ -70,7 +70,9 @@ public class World implements Comparator<Intersection>{
 
     public Color shade_hit(Computation comps) {
         boolean shadowed = is_shadowed(comps.over_point);
-        return comps.object.material.lighting(comps.object,this.lights.get(0),comps.over_point,comps.eyev,comps.normalv,shadowed);
+        Color surface = comps.object.material.lighting(comps.object,this.lights.get(0),comps.over_point,comps.eyev,comps.normalv,shadowed);
+        Color reflected = reflected_color(comps);
+        return surface.add(reflected);
     }
 
     public Color color_at(Ray ray) {
@@ -84,6 +86,17 @@ public class World implements Comparator<Intersection>{
             Computation comps = intersection.prepare_computations(ray);
             return shade_hit(comps);
         }
+    }
+
+    public Color reflected_color(Computation comps) {
+        if (comps.object.getMaterial().getReflective() == 0.0) {
+            return Color.BLACK;
+        }
+
+        Ray reflect_ray = new Ray(comps.over_point,comps.reflectv);
+        Color color = color_at(reflect_ray);
+
+        return color.mul(comps.object.getMaterial().getReflective());
     }
 
     public static Matrix view_transform(Tuple from, Tuple to, Tuple up) {

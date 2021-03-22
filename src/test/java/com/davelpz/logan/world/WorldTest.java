@@ -7,6 +7,7 @@ import com.davelpz.logan.matrix.Matrix;
 import com.davelpz.logan.ray.Computation;
 import com.davelpz.logan.ray.Intersection;
 import com.davelpz.logan.ray.Ray;
+import com.davelpz.logan.shapes.Plane;
 import com.davelpz.logan.shapes.Shape;
 import com.davelpz.logan.shapes.Sphere;
 import com.davelpz.logan.tuple.Tuple;
@@ -193,5 +194,47 @@ public class WorldTest {
         Computation comps = i.prepare_computations(r);
         Color c = w.shade_hit(comps);
         assertTrue(c.equals(new Color(0.1,0.1,0.1)));
+    }
+
+    @Test
+    public void reflected_color() {
+        World w = World.defaultWorld();
+        Ray r = new Ray(Tuple.point(0,0,0), Tuple.vector(0,0,1));
+        Shape shape = w.getObjects().get(1);
+        shape.getMaterial().setAmbient(1);
+        Intersection i = new Intersection(1,shape);
+        Computation comps = i.prepare_computations(r);
+        Color color = w.reflected_color(comps);
+        assertTrue(color.equals(Color.BLACK));
+    }
+
+    @Test
+    public void reflected_color2() {
+        World w = World.defaultWorld();
+        Shape plane = new Plane();
+        plane.getMaterial().setReflective(0.5);
+        plane.setTransform(Matrix.translation(0,-1,0));
+        w.getObjects().add(plane);
+
+        Ray r = new Ray(Tuple.point(0,0,-3), Tuple.vector(0,-Math.sqrt(2)/2.0,Math.sqrt(2)/2.0));
+        Intersection i = new Intersection(Math.sqrt(2),plane);
+        Computation comps = i.prepare_computations(r);
+        Color color = w.reflected_color(comps);
+        assertTrue(color.equals(new Color(0.19033220149513302,0.23791525186891627,0.14274915112134973)));
+    }
+
+    @Test
+    public void reflected_color3() {
+        World w = World.defaultWorld();
+        Shape plane = new Plane();
+        plane.getMaterial().setReflective(0.5);
+        plane.setTransform(Matrix.translation(0,-1,0));
+        w.getObjects().add(plane);
+
+        Ray r = new Ray(Tuple.point(0,0,-3), Tuple.vector(0,-Math.sqrt(2)/2.0,Math.sqrt(2)/2.0));
+        Intersection i = new Intersection(Math.sqrt(2),plane);
+        Computation comps = i.prepare_computations(r);
+        Color color = w.shade_hit(comps);
+        assertTrue(color.equals(new Color(0.8767572837020907,0.924340334075874,0.8291742333283074)));
     }
 }
